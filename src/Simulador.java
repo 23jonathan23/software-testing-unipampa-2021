@@ -77,6 +77,7 @@ public class Simulador
         ovelhas.addAll(novasOvelhas);
         lobos.addAll(novosLobos);
 
+        etapa++
         tela.mostraStatus(etapa, campo);
     }
     
