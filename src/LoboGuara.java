@@ -93,10 +93,14 @@ public class LoboGuara
         while(it.hasNext()) {
             Localizacao onde = it.next();
             Object animal = campo.getObjectAt(onde);
-        	Ovelha ovelha = (Ovelha) animal;
-            ovelha.setMorte();
-            nivelFome = VALOR_FOME_OVELHA;
-            return onde;
+
+        	if(animal != null && animal.getClass() == Ovelha.class)
+            {
+                Ovelha ovelha = (Ovelha) animal;
+                ovelha.setMorte();
+                nivelFome = VALOR_FOME_OVELHA;
+                return onde;
+            }
         }
         return null;
     }
