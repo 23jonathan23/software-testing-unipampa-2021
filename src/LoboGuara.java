@@ -40,6 +40,7 @@ public class LoboGuara
             Localizacao newLocalizacao = procuraComida(localizacao);
             if(newLocalizacao == null) { 
                 newLocalizacao = campo.localizacaoAdjacenteLivre(localizacao);
+                incrementaFome();
             }
             if(newLocalizacao != null) {
                 setLocalizacao(newLocalizacao);
