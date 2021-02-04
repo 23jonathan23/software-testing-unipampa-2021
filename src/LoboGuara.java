@@ -119,7 +119,7 @@ public class LoboGuara
     private int procria()
     {
         int nascimentos = 0;
-        if(podeProcriar() && rand.nextDouble() < PROBABILIDADE_PROCRIACAO) {
+        if(podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
             nascimentos = rand.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
         }
         return nascimentos;
@@ -127,7 +127,7 @@ public class LoboGuara
 
     private boolean podeProcriar()
     {
-        return idade > IDADE_PROCRIACAO;
+        return idade >= IDADE_PROCRIACAO;
     }
 
     private void setMorte()
