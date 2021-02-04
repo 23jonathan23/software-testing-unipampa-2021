@@ -72,7 +72,7 @@ public class Campo
     
     public Localizacao localizacaoAdjacenteLivre(Localizacao localizacao)
     {
-        List<Localizacao> livre = localizacoesAdjacentesLivres(localizacao);
+        List<Localizacao> livre = localizacoesAdjacentes(localizacao);
         if(livre.size() > 0) {
             return livre.get(0);
         }
