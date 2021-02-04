@@ -20,3 +20,6 @@ bin/
 *.jar
 *.war
 *.ear
+
+#OS
+.DS_Store
