@@ -73,7 +73,7 @@ public class LoboGuara
     private void incrementaIdade()
     {
         idade++;
-        if(idade >= IDADE_MAXIMA) {
+        if(idade > IDADE_MAXIMA) {
             setMorte();
         }
     }
