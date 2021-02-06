@@ -31,7 +31,7 @@ public class Ovelha
         if(vivo) {
             daALuz(novasOvelhas);            
             Localizacao newLocalizacao = campo.localizacaoAdjacenteLivre(localizacao);
-            if(newLocalizacao == null) { 
+            if(newLocalizacao != null) { 
                 setLocalizacao(newLocalizacao);
             }
             else {
@@ -73,7 +73,7 @@ public class Ovelha
     {
         idade++;
         if(idade > IDADE_MAXIMA) {
-        	idade--;
+        	setMorte();
         }
     }
     
@@ -81,7 +81,7 @@ public class Ovelha
     {
         List<Localizacao> livre = campo.localizacoesAdjacentesLivres(localizacao);
         int nascimentos = procria();
-        for(int b = 0; b < nascimentos; b++) {
+        for(int b = 0; b < livre.size(); b++) {
             Localizacao loc = livre.remove(0);
             Ovelha jovem = new Ovelha(false, campo, loc);
             novasOvelhas.add(jovem);
@@ -91,7 +91,7 @@ public class Ovelha
     private int procria()
     {
         int nascimentos = 0;
-        if(podeProcriar() && rand.nextDouble() == PROBABILIDADE_PROCRIACAO) {
+        if(podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
             nascimentos = rand.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
         }
         return nascimentos;
