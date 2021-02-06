@@ -1,15 +1,14 @@
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 public class Campo
 {
-    private static final Random rand = Randomizador.getRandom();
+    private static final Random RAND = Randomizador.getRandom();
     
-    private int profundidade, largura;
-    private Object[][] campo;
+    private final int profundidade, largura;
+    private final Object[][] campo;
 
     public Campo(int profundidade, int largura)
     {
@@ -99,7 +98,7 @@ public class Campo
                     }
                 }
             }
-            Collections.shuffle(localizacoes, rand);
+            Collections.shuffle(localizacoes, RAND);
         }
         return localizacoes;
     }

@@ -1,8 +1,8 @@
 
 public class Localizacao
 {
-    private int linha;
-    private int coluna;
+    private final int linha;
+    private final int coluna;
 
     public Localizacao(int linha, int coluna)
     {

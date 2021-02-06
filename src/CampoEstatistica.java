@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 public class CampoEstatistica
 {
-    private HashMap<Class, Contador> contadores;
+    private final HashMap<Class, Contador> contadores;
     private boolean contadoresValidos;
 
     public CampoEstatistica()
