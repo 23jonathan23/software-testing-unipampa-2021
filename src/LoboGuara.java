@@ -42,7 +42,7 @@ public class LoboGuara
                 newLocalizacao = campo.localizacaoAdjacenteLivre(localizacao);
                 incrementaFome();
             }
-            if(newLocalizacao != null) {
+            if(newLocalizacao != null && vivo) {
                 setLocalizacao(newLocalizacao);
             }
             else {
