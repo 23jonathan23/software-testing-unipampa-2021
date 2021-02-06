@@ -7,7 +7,7 @@ public class Ovelha
     private static final int IDADE_MAXIMA = 40;
     private static final double PROBABILIDADE_PROCRIACAO = 0.15;
     private static final int TAMANHO_MAXIMO_NINHADA = 4;
-    private static final Random rand = Randomizador.getRandom();
+    private static final Random RAND = Randomizador.getRandom();
     
     private int idade;
     private boolean vivo;
@@ -21,7 +21,7 @@ public class Ovelha
         this.campo = campo;
         setLocalizacao(localizacao);
         if(randomAge) {
-            idade = rand.nextInt(IDADE_MAXIMA);
+            idade = RAND.nextInt(IDADE_MAXIMA);
         }
     }
     
@@ -94,8 +94,8 @@ public class Ovelha
     private int procria()
     {
         int nascimentos = 0;
-        if(podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
-            nascimentos = rand.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
+        if(podeProcriar() && RAND.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
+            nascimentos = RAND.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
         }
         return nascimentos;
     }
