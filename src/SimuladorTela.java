@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,11 +10,11 @@ public class SimuladorTela extends JFrame
 
     private final String PREFIXO_ETAPA = "Etapa: ";
     private final String PREFIXO_POPULACAO = "Populacao: ";
-    private JLabel rotuloEtapa, populacao;
-    private VisaoCampo visaoCampo;
+    private final JLabel rotuloEtapa, populacao;
+    private final VisaoCampo visaoCampo;
     
-    private Map<Class, Color> cores;
-    private CampoEstatistica estatisticas;
+    private final Map<Class, Color> cores;
+    private final CampoEstatistica estatisticas;
     
     public SimuladorTela(int height, int width)
     {
@@ -92,7 +91,7 @@ public class SimuladorTela extends JFrame
     {
         private final int GRID_VIEW_SCALING_FACTOR = 6;
 
-        private int gridWidth, gridHeight;
+        private final int gridWidth, gridHeight;
         private int xScale, yScale;
         Dimension size;
         private Graphics g;
@@ -105,6 +104,7 @@ public class SimuladorTela extends JFrame
             size = new Dimension(0, 0);
         }
 
+        @Override
         public Dimension getPreferredSize()
         {
             return new Dimension(gridWidth * GRID_VIEW_SCALING_FACTOR,
@@ -135,6 +135,7 @@ public class SimuladorTela extends JFrame
             g.fillRect(x * xScale, y * yScale, xScale-1, yScale-1);
         }
 
+        @Override
         public void paintComponent(Graphics g)
         {
             if(fieldImage != null) {

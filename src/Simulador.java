@@ -49,7 +49,7 @@ public class Simulador
     
     public void simulacao(int numEtapas)
     {
-        for(int etapa = 1; etapa <= numEtapas && tela.ehViavel(campo); etapa++) {
+        for(int etapaAtual = 1; etapaAtual <= numEtapas && tela.ehViavel(campo); etapaAtual++) {
             simulacaoUmaEtapa();
         }
     }
@@ -60,7 +60,7 @@ public class Simulador
         for(Iterator<Ovelha> it = ovelhas.iterator(); it.hasNext(); ) {
             Ovelha ovelha = it.next();
             ovelha.corre(novasOvelhas);
-            if(ovelha.estaViva()) {
+            if(!ovelha.estaViva()) {
                 it.remove();
             }
         }
@@ -69,7 +69,7 @@ public class Simulador
         for(Iterator<LoboGuara> it = lobos.iterator(); it.hasNext(); ) {
             LoboGuara loboGuara = it.next();
             loboGuara.caca(novosLobos);
-            if(loboGuara.estaVivo()) {
+            if(!loboGuara.estaVivo()) {
                 it.remove();
             }
         }
@@ -77,10 +77,11 @@ public class Simulador
         ovelhas.addAll(novasOvelhas);
         lobos.addAll(novosLobos);
 
+        etapa++;
         tela.mostraStatus(etapa, campo);
     }
     
-    public void redefine()
+    private void redefine()
     {
         etapa = 0;
         ovelhas.clear();
@@ -96,12 +97,12 @@ public class Simulador
         campo.limpa();
         for(int linha = 0; linha < campo.getProfundidade(); linha++) {
             for(int coluna = 0; coluna < campo.getLargura(); coluna++) {
-                if(rand.nextDouble() < PROBABILIDADE_CRIACAO_OVELHA) {
+                if(rand.nextDouble() <= PROBABILIDADE_CRIACAO_LOBOGUARA) {
                     Localizacao localizacao = new Localizacao(linha, coluna);
                     LoboGuara loboGuara = new LoboGuara(false, campo, localizacao);
                     lobos.add(loboGuara);
                 }
-                else if(rand.nextDouble() < PROBABILIDADE_CRIACAO_LOBOGUARA) {
+                else if(rand.nextDouble() <= PROBABILIDADE_CRIACAO_OVELHA) {
                     Localizacao localizacao = new Localizacao(linha, coluna);
                     Ovelha ovelha = new Ovelha(false, campo, localizacao);
                     ovelhas.add(ovelha);

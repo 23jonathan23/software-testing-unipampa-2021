@@ -2,21 +2,16 @@ import java.util.Random;
 
 public class Randomizador
 {
-    
-    private static Random rand = new Random(); //para poder dar reset foi preciso tirar o final
-    
+    private static final int SEED = 1111;
+    private static final Random RAND = new Random();
 
     public static Random getRandom()
     {
-        
-            return rand;
-        
+        return RAND;
     }
     
     public static void reset()
     {
-        
-            rand = new Random();
-        
+        RAND.setSeed(SEED);
     }
 }

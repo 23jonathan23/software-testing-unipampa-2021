@@ -1,8 +1,8 @@
 
 public class Localizacao
 {
-    private int linha;
-    private int coluna;
+    private final int linha;
+    private final int coluna;
 
     public Localizacao(int linha, int coluna)
     {
@@ -10,6 +10,7 @@ public class Localizacao
         this.coluna = coluna;
     }
     
+    @Override
     public boolean equals(Object obj)
     {
         if(obj instanceof Localizacao) {
@@ -21,11 +22,13 @@ public class Localizacao
         }
     }
     
+    @Override
     public String toString()
     {
         return linha + "," + coluna;
     }
     
+    @Override
     public int hashCode()
     {
         return (linha << 16) + coluna;
