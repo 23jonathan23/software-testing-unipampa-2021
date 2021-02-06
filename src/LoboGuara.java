@@ -40,8 +40,9 @@ public class LoboGuara
             Localizacao newLocalizacao = procuraComida(localizacao);
             if(newLocalizacao == null) { 
                 newLocalizacao = campo.localizacaoAdjacenteLivre(localizacao);
+                incrementaFome();
             }
-            if(newLocalizacao != null) {
+            if(newLocalizacao != null && vivo) {
                 setLocalizacao(newLocalizacao);
             }
             else {
@@ -72,7 +73,7 @@ public class LoboGuara
     private void incrementaIdade()
     {
         idade++;
-        if(idade >= IDADE_MAXIMA) {
+        if(idade > IDADE_MAXIMA) {
             setMorte();
         }
     }
@@ -92,10 +93,14 @@ public class LoboGuara
         while(it.hasNext()) {
             Localizacao onde = it.next();
             Object animal = campo.getObjectAt(onde);
-        	Ovelha ovelha = (Ovelha) animal;
-            ovelha.setMorte();
-            nivelFome = VALOR_FOME_OVELHA;
-            return onde;
+
+        	if(animal != null && animal.getClass() == Ovelha.class)
+            {
+                Ovelha ovelha = (Ovelha) animal;
+                ovelha.setMorte();
+                nivelFome = VALOR_FOME_OVELHA;
+                return onde;
+            }
         }
         return null;
     }
@@ -105,6 +110,9 @@ public class LoboGuara
         List<Localizacao> livre = campo.localizacoesAdjacentesLivres(localizacao);
         int nascimentos = procria();
         for(int b = 0; b < nascimentos; b++) {
+            if(livre.isEmpty()) {
+                break;
+            }
             Localizacao loc = livre.remove(0);
             LoboGuara jovem = new LoboGuara(false, campo, loc);
             novosLobos.add(jovem);
@@ -114,7 +122,7 @@ public class LoboGuara
     private int procria()
     {
         int nascimentos = 0;
-        if(podeProcriar() && rand.nextDouble() < PROBABILIDADE_PROCRIACAO) {
+        if(podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
             nascimentos = rand.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
         }
         return nascimentos;
@@ -122,7 +130,7 @@ public class LoboGuara
 
     private boolean podeProcriar()
     {
-        return idade > IDADE_PROCRIACAO;
+        return idade >= IDADE_PROCRIACAO;
     }
 
     private void setMorte()
