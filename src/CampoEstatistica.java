@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.util.HashMap;
 
 public class CampoEstatistica
@@ -69,7 +68,6 @@ public class CampoEstatistica
     
     private void geraContadores(Campo campo)
     {
-        redefine();
         for(int linha = 0; linha < campo.getProfundidade(); linha++) {
             for(int coluna = 0; coluna < campo.getLargura(); coluna++) {
                 Object animal = campo.getObjectAt(linha, coluna);
