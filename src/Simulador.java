@@ -49,7 +49,7 @@ public class Simulador
     
     public void simulacao(int numEtapas)
     {
-        for(int etapa = 1; etapa <= numEtapas && tela.ehViavel(campo); etapa++) {
+        for(int etapaAtual = 1; etapaAtual <= numEtapas && tela.ehViavel(campo); etapaAtual++) {
             simulacaoUmaEtapa();
         }
     }
