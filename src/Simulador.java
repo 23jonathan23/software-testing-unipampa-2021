@@ -77,11 +77,11 @@ public class Simulador
         ovelhas.addAll(novasOvelhas);
         lobos.addAll(novosLobos);
 
-        etapa++
+        etapa++;
         tela.mostraStatus(etapa, campo);
     }
     
-    public void redefine()
+    private void redefine()
     {
         etapa = 0;
         ovelhas.clear();
