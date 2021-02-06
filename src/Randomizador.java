@@ -7,18 +7,11 @@ public class Randomizador
 
     public static Random getRandom()
     {
-        if(useShared) {
-            return rand;
-        }
-        else {
-            return new Random();
-        }
+        return RAND;
     }
     
     public static void reset()
     {
-        if(useShared) {
-            rand.setSeed(SEED);
-        }
+        RAND.setSeed(SEED);
     }
 }
