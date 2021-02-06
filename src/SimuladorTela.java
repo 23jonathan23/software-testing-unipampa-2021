@@ -104,6 +104,7 @@ public class SimuladorTela extends JFrame
             size = new Dimension(0, 0);
         }
 
+        @Override
         public Dimension getPreferredSize()
         {
             return new Dimension(gridWidth * GRID_VIEW_SCALING_FACTOR,
@@ -134,6 +135,7 @@ public class SimuladorTela extends JFrame
             g.fillRect(x * xScale, y * yScale, xScale-1, yScale-1);
         }
 
+        @Override
         public void paintComponent(Graphics g)
         {
             if(fieldImage != null) {
