@@ -7,6 +7,9 @@ public class Startup {
         
         Scanner e = new Scanner(System.in);
         Simulador simulador = new Simulador();
+        
+        System.out.println("------ SIMULADOR DE LOBOS-GUARÁ E OVELHAS ------");
+        System.out.println("---- VERSÃO REFATORADA PELO GRUPO 6 DE RP II ----");
         menu(simulador, e);
 
 
@@ -14,7 +17,7 @@ public class Startup {
     
     public static void menu(Simulador simulador, Scanner e) {
 
-        int comando = -1;
+        int comando = 0;
 
         System.out.println("-------------------------------------");
         System.out.println("1 - Executa Uma Etapa");
@@ -23,10 +26,14 @@ public class Startup {
         System.out.println("4 - Reinicia o simulador");
         System.out.println("5 - Sair");
         System.out.println("-------------------------------------");
-
-        comando = e.nextInt();
-
-        switch (comando) {
+        
+        String entrada = e.nextLine();
+        
+        if (isInt(entrada)) {
+            
+            comando = Integer.parseInt(entrada);
+            
+            switch (comando) {
 
             case 1:
                 simulador.simulacaoUmaEtapa();
@@ -35,12 +42,17 @@ public class Startup {
                 break;
 
             case 2:
-                int numEtapas = 1;
 
                 System.out.println("Digite o número de etapas:");
-                numEtapas = e.nextInt();
-                simulador.simulacao(numEtapas);
-                menu(simulador, e);
+                String numEtapas = e.nextLine();
+                
+                if (isInt(numEtapas)) {
+                    simulador.simulacao(Integer.parseInt(numEtapas));  
+                    menu(simulador, e);
+                }else{
+                    System.err.println("Entrada inválida.");
+                    menu(simulador, e);                    
+                }
 
                 break;
 
@@ -58,10 +70,26 @@ public class Startup {
 
             case 5:
                 System.exit(0);
+                
             default:
-                System.out.println("Entrada inválida");
+                System.err.println("Entrada inválida");
                 menu(simulador, e);
                 
+            }
+        } else{
+            
+            System.err.println("Entrada inválida");
+            menu(simulador, e);
         }
-    }    
+
+        
+    }
+    public static boolean isInt(String v) {
+        try {
+            Integer.parseInt(v);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

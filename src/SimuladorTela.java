@@ -21,7 +21,7 @@ public class SimuladorTela extends JFrame
         estatisticas = new CampoEstatistica();
         cores = new LinkedHashMap<Class, Color>();
 
-        setTitle("Simulacao Coelhos and Raposas");
+        setTitle("Simulacao Lobos-guará e ovelhas");
         rotuloEtapa = new JLabel(PREFIXO_ETAPA, JLabel.CENTER);
         populacao = new JLabel(PREFIXO_POPULACAO, JLabel.CENTER);
         
