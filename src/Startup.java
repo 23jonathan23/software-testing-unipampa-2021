@@ -8,7 +8,7 @@ public class Startup {
         Scanner e = new Scanner(System.in);
         Simulador simulador = new Simulador();
         
-        System.out.println("------ SIMULADOR DE LOBOS-GUARÁ E OVELHAS ------");
+        System.out.println("------ SIMULADOR DE LOBOS-GUARA E OVELHAS ------");
         System.out.println("---- VERSÃO REFATORADA PELO GRUPO 6 DE RP II ----");
         menu(simulador, e);
 
