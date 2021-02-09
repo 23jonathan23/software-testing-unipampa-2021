@@ -81,7 +81,7 @@ public class Simulador
         tela.mostraStatus(etapa, campo);
     }
     
-    private void redefine()
+    public void redefine()
     {
         etapa = 0;
         ovelhas.clear();
