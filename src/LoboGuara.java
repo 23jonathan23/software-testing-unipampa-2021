@@ -109,10 +109,8 @@ public class LoboGuara
     {
         List<Localizacao> livre = campo.localizacoesAdjacentesLivres(localizacao);
         int nascimentos = procria();
-        for(int b = 0; b < nascimentos; b++) {
-            if(livre.isEmpty()) {
-                break;
-            }
+	int n = livre.size();
+        for(int b = 0; b < n && b < nascimentos; b++) {
             Localizacao loc = livre.remove(0);
             LoboGuara jovem = new LoboGuara(false, campo, loc);
             novosLobos.add(jovem);
