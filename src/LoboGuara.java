@@ -34,15 +34,15 @@ public class LoboGuara
     
     public void caca(List<LoboGuara> novosLobos)
     {
+        incrementaFome();
         incrementaIdade();
         if(vivo) {
             daALuz(novosLobos);            
             Localizacao newLocalizacao = procuraComida(localizacao);
             if(newLocalizacao == null) { 
                 newLocalizacao = campo.localizacaoAdjacenteLivre(localizacao);
-                incrementaFome();
             }
-            if(newLocalizacao != null && vivo) {
+            if(newLocalizacao != null) {
                 setLocalizacao(newLocalizacao);
             }
             else {
@@ -109,7 +109,8 @@ public class LoboGuara
     {
         List<Localizacao> livre = campo.localizacoesAdjacentesLivres(localizacao);
         int nascimentos = procria();
-	int n = livre.size();
+	    int n = livre.size();
+        
         for(int b = 0; b < n && b < nascimentos; b++) {
             Localizacao loc = livre.remove(0);
             LoboGuara jovem = new LoboGuara(false, campo, loc);
