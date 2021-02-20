@@ -82,7 +82,7 @@ public class Ovelha
         List<Localizacao> livre = campo.localizacoesAdjacentesLivres(localizacao);
         int nascimentos = procria();
 	    int n = livre.size();
-        for(int b = 0; n > 0 && b < nascimentos; b++) {
+        for(int b = 0; b < n && b < nascimentos; b++) {
             Localizacao loc = livre.remove(0);
             Ovelha jovem = new Ovelha(false, campo, loc);
             novasOvelhas.add(jovem);
