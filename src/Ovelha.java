@@ -1,27 +1,32 @@
 import java.util.List;
 import java.util.Random;
 
-public class Ovelha
+public class Ovelha extends Animal
 {
-    private static final int IDADE_PROCRIACAO = 5;
-    private static final int IDADE_MAXIMA = 40;
-    private static final double PROBABILIDADE_PROCRIACAO = 0.15;
-    private static final int TAMANHO_MAXIMO_NINHADA = 4;
-    private static final Random RAND = Randomizador.getRandom();
+//    private static final int IDADE_PROCRIACAO = 5;
+//    private static final int IDADE_MAXIMA = 40;
+//    private static final double PROBABILIDADE_PROCRIACAO = 0.15;
+//    private static final int TAMANHO_MAXIMO_NINHADA = 4;
+//    private static final Random RAND = Randomizador.getRandom();
     
-    private int idade;
-    private boolean vivo;
-    private Localizacao localizacao;
-    private Campo campo;
+//    private int idade;
+//    private boolean vivo;
+//    private Localizacao localizacao;
+//    private Campo campo;
 
     public Ovelha(boolean randomAge, Campo campo, Localizacao localizacao)
     {
+        IDADE_PROCRIACAO = 5;
+        IDADE_MAXIMA = 40;
+        PROBABILIDADE_PROCRIACAO = 0.15;
+        TAMANHO_MAXIMO_NINHADA = 4;
+        
         idade = 0;
         vivo = true;
         this.campo = campo;
         setLocalizacao(localizacao);
         if(randomAge) {
-            idade = RAND.nextInt(IDADE_MAXIMA);
+            idade = rand.nextInt(IDADE_MAXIMA);
         }
     }
     
@@ -92,8 +97,8 @@ public class Ovelha
     private int procria()
     {
         int nascimentos = 0;
-        if(podeProcriar() && RAND.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
-            nascimentos = RAND.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
+        if(podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
+            nascimentos = rand.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
         }
         return nascimentos;
     }
