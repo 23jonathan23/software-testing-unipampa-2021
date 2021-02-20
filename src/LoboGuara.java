@@ -34,15 +34,16 @@ public class LoboGuara
     
     public void caca(List<LoboGuara> novosLobos)
     {
-        incrementaFome();
+
         incrementaIdade();
         if(vivo) {
             daALuz(novosLobos);            
             Localizacao newLocalizacao = procuraComida(localizacao);
             if(newLocalizacao == null) { 
                 newLocalizacao = campo.localizacaoAdjacenteLivre(localizacao);
+                incrementaFome();
             }
-            if(newLocalizacao != null) {
+            if(newLocalizacao != null && vivo) {
                 setLocalizacao(newLocalizacao);
             }
             else {
@@ -94,15 +95,15 @@ public class LoboGuara
             Localizacao onde = it.next();
             Object animal = campo.getObjectAt(onde);
 
-        	if(animal != null && animal.instanceOf(Ovelha)){ return null }
+        	if(animal != null && animal instanceof Ovelha){ 
 
             Ovelha ovelha = (Ovelha) animal;
-            if(!ovelha.estaViva()){ return null }
 
             ovelha.setMorte();
             nivelFome = VALOR_FOME_OVELHA;
             
             return onde;
+            }
         }
         return null;
     }
@@ -113,7 +114,7 @@ public class LoboGuara
         int nascimentos = procria();
 	    int n = livre.size();
         
-        for(int b = 0; n > 0 && b < nascimentos; b++) {
+        for(int b = 0; b < n && b < nascimentos; b++) {
             Localizacao loc = livre.remove(0);
             LoboGuara jovem = new LoboGuara(false, campo, loc);
             novosLobos.add(jovem);
