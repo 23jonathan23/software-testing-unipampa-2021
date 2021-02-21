@@ -3,96 +3,83 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class Campo
-{
+public class Campo {
     private static final Random RAND = Randomizador.getRandom();
-    
+
     private final int profundidade, largura;
     private final Object[][] campo;
 
-    public Campo(int profundidade, int largura)
-    {
+    public Campo(int profundidade, int largura) {
         this.profundidade = profundidade;
         this.largura = largura;
         campo = new Object[profundidade][largura];
     }
-    
-    public void limpa()
-    {
-        for(int linha = 0; linha < profundidade; linha++) {
-            for(int coluna = 0; coluna < largura; coluna++) {
+
+    public void limpa() {
+        for (int linha = 0; linha < profundidade; linha++) {
+            for (int coluna = 0; coluna < largura; coluna++) {
                 campo[linha][coluna] = null;
             }
         }
     }
-    
-    public void limpa(Localizacao localizacao)
-    {
+
+    public void limpa(Localizacao localizacao) {
         campo[localizacao.getLinha()][localizacao.getColuna()] = null;
     }
-    
-    public void lugar(Object animal, int linha, int coluna)
-    {
+
+    public void lugar(Object animal, int linha, int coluna) {
         lugar(animal, new Localizacao(linha, coluna));
     }
-    
-    public void lugar(Object animal, Localizacao localizacao)
-    {
+
+    public void lugar(Object animal, Localizacao localizacao) {
         campo[localizacao.getLinha()][localizacao.getColuna()] = animal;
     }
-    
-    public Object getObjectAt(Localizacao localizacao)
-    {
+
+    public Object getObjectAt(Localizacao localizacao) {
         return getObjectAt(localizacao.getLinha(), localizacao.getColuna());
     }
- 
-    public Object getObjectAt(int linha, int coluna)
-    {
+
+    public Object getObjectAt(int linha, int coluna) {
         return campo[linha][coluna];
     }
-    
-    public Localizacao localizacaoAdjacenteRandomica(Localizacao localizacao)
-    {
+
+    public Localizacao localizacaoAdjacenteRandomica(Localizacao localizacao) {
         List<Localizacao> adjacent = localizacoesAdjacentes(localizacao);
         return adjacent.get(0);
     }
-    
-    public List<Localizacao> localizacoesAdjacentesLivres(Localizacao localizacao)
-    {
+
+    public List<Localizacao> localizacoesAdjacentesLivres(Localizacao localizacao) {
         List<Localizacao> livre = new LinkedList<Localizacao>();
         List<Localizacao> adjacente = localizacoesAdjacentes(localizacao);
-        for(Localizacao proximo : adjacente) {
-            if(getObjectAt(proximo) == null) {
+        for (Localizacao proximo : adjacente) {
+            if (getObjectAt(proximo) == null) {
                 livre.add(proximo);
             }
         }
         return livre;
     }
-    
-    public Localizacao localizacaoAdjacenteLivre(Localizacao localizacao)
-    {
+
+    public Localizacao localizacaoAdjacenteLivre(Localizacao localizacao) {
         List<Localizacao> livre = localizacoesAdjacentes(localizacao);
-        if(livre.size() > 0) {
+        if (livre.size() > 0) {
             return livre.get(0);
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    public List<Localizacao> localizacoesAdjacentes(Localizacao localizacao)
-    {
+    public List<Localizacao> localizacoesAdjacentes(Localizacao localizacao) {
         assert localizacao != null : "Null localizacao passed to adjacentLocalizacoes";
         List<Localizacao> localizacoes = new LinkedList<Localizacao>();
-        if(localizacao != null) {
+        if (localizacao != null) {
             int linha = localizacao.getLinha();
             int coluna = localizacao.getColuna();
-            for(int roffset = -1; roffset <= 1; roffset++) {
+            for (int roffset = -1; roffset <= 1; roffset++) {
                 int proximaLinha = linha + roffset;
-                if(proximaLinha >= 0 && proximaLinha < profundidade) {
-                    for(int coffset = -1; coffset <= 1; coffset++) {
+                if (proximaLinha >= 0 && proximaLinha < profundidade) {
+                    for (int coffset = -1; coffset <= 1; coffset++) {
                         int proximaColuna = coluna + coffset;
-                        if(proximaColuna >= 0 && proximaColuna < largura && (roffset != 0 || coffset != 0)) {
+                        if (proximaColuna >= 0 && proximaColuna < largura && (roffset != 0 || coffset != 0)) {
                             localizacoes.add(new Localizacao(proximaLinha, proximaColuna));
                         }
                     }
@@ -103,13 +90,11 @@ public class Campo
         return localizacoes;
     }
 
-    public int getProfundidade()
-    {
+    public int getProfundidade() {
         return profundidade;
     }
-    
-    public int getLargura()
-    {
+
+    public int getLargura() {
         return largura;
     }
 }
