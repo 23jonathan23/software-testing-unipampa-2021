@@ -1,3 +1,5 @@
+package main.source;
+
 import java.awt.*;
 import javax.swing.*;
 import java.util.LinkedHashMap;

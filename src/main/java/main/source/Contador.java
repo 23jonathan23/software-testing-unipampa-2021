@@ -1,3 +1,5 @@
+package main.source;
+
 import java.awt.Color;
 
 public class Contador {
@@ -5,7 +7,7 @@ public class Contador {
     private int count;
 
     public Contador(String name) {
-        this.name = name;
+        this.name = name.substring(12);
         count = 0;
     }
 
