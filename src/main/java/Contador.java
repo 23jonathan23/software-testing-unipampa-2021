@@ -1,33 +1,27 @@
 import java.awt.Color;
 
-public class Contador
-{
+public class Contador {
     private String name;
     private int count;
 
-    public Contador(String name)
-    {
+    public Contador(String name) {
         this.name = name;
         count = 0;
     }
-    
-    public String getName()
-    {
+
+    public String getName() {
         return name;
     }
 
-    public int getCount()
-    {
+    public int getCount() {
         return count;
     }
 
-    public void increment()
-    {
+    public void increment() {
         count++;
     }
-    
-    public void reset()
-    {
+
+    public void reset() {
         count = 0;
     }
 }

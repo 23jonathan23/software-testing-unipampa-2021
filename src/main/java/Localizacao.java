@@ -1,46 +1,37 @@
-
-public class Localizacao
-{
+public class Localizacao {
     private final int linha;
     private final int coluna;
 
-    public Localizacao(int linha, int coluna)
-    {
+    public Localizacao(int linha, int coluna) {
         this.linha = linha;
         this.coluna = coluna;
     }
-    
+
     @Override
-    public boolean equals(Object obj)
-    {
-        if(obj instanceof Localizacao) {
-        	Localizacao outra = (Localizacao) obj;
+    public boolean equals(Object obj) {
+        if (obj instanceof Localizacao) {
+            Localizacao outra = (Localizacao) obj;
             return linha == outra.getLinha() && coluna == outra.getColuna();
-        }
-        else {
+        } else {
             return false;
         }
     }
-    
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return linha + "," + coluna;
     }
-    
+
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return (linha << 16) + coluna;
     }
-    
-    public int getLinha()
-    {
+
+    public int getLinha() {
         return linha;
     }
-    
-    public int getColuna()
-    {
+
+    public int getColuna() {
         return coluna;
     }
 }
