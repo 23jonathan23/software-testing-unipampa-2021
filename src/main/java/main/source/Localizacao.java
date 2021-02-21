@@ -1,3 +1,5 @@
+package main.source;
+
 public class Localizacao {
     private final int linha;
     private final int coluna;

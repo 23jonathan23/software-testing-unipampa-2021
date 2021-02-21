@@ -1,3 +1,5 @@
+package main.source;
+
 import java.util.Random;
 
 public class Randomizador {

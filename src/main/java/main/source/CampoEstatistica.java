@@ -1,3 +1,5 @@
+package main.source;
+
 import java.util.HashMap;
 
 public class CampoEstatistica {

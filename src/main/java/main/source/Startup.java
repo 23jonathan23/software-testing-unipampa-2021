@@ -1,3 +1,5 @@
+package main.source;
+
 import java.util.Scanner;
 
 public class Startup {
