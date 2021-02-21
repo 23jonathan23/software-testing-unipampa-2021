@@ -1,10 +1,11 @@
-package main.source;
+package edu.unipampa.es.rp2.marco1;
 
 import java.awt.*;
 import javax.swing.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@SuppressWarnings("serial")
 public class SimuladorTela extends JFrame {
     private static final Color COR_VAZIA = Color.white;
     private static final Color COR_INDEFINIDA = Color.gray;
@@ -14,12 +15,12 @@ public class SimuladorTela extends JFrame {
     private final JLabel rotuloEtapa, populacao;
     private final VisaoCampo visaoCampo;
 
-    private final Map<Class, Color> cores;
+    private final Map<Class<?>, Color> cores;
     private final CampoEstatistica estatisticas;
 
     public SimuladorTela(int height, int width) {
         estatisticas = new CampoEstatistica();
-        cores = new LinkedHashMap<Class, Color>();
+        cores = new LinkedHashMap<Class<?>, Color>();
 
         setTitle("Simulacao Lobos-guará e ovelhas");
         rotuloEtapa = new JLabel(PREFIXO_ETAPA, JLabel.CENTER);
@@ -37,11 +38,11 @@ public class SimuladorTela extends JFrame {
         setVisible(true);
     }
 
-    public void setCor(Class animalClass, Color color) {
+    public void setCor(Class<?> animalClass, Color color) {
         cores.put(animalClass, color);
     }
 
-    private Color getCor(Class animalClass) {
+    private Color getCor(Class<?> animalClass) {
         Color coluna = cores.get(animalClass);
         if (coluna == null) {
             return COR_INDEFINIDA;

@@ -1,13 +1,13 @@
-package main.source;
+package edu.unipampa.es.rp2.marco1;
 
 import java.util.HashMap;
 
 public class CampoEstatistica {
-    private final HashMap<Class, Contador> contadores;
+    private final HashMap<Class<?>, Contador> contadores;
     private boolean contadoresValidos;
 
     public CampoEstatistica() {
-        contadores = new HashMap<Class, Contador>();
+        contadores = new HashMap<Class<?>, Contador>();
         contadoresValidos = true;
     }
 
@@ -16,7 +16,7 @@ public class CampoEstatistica {
         if (!contadoresValidos) {
             geraContadores(campo);
         }
-        for (Class chave : contadores.keySet()) {
+        for (Class<?> chave : contadores.keySet()) {
             Contador info = contadores.get(chave);
             buffer.append(info.getName());
             buffer.append(": ");
@@ -28,13 +28,13 @@ public class CampoEstatistica {
 
     public void redefine() {
         contadoresValidos = false;
-        for (Class chave : contadores.keySet()) {
+        for (Class<?> chave : contadores.keySet()) {
             Contador contador = contadores.get(chave);
             contador.reset();
         }
     }
 
-    public void incrementaContador(Class animalClass) {
+    public void incrementaContador(Class<?> animalClass) {
         Contador contador = contadores.get(animalClass);
         if (contador == null) {
             contador = new Contador(animalClass.getName());
@@ -52,7 +52,7 @@ public class CampoEstatistica {
         if (!contadoresValidos) {
             geraContadores(campo);
         }
-        for (Class key : contadores.keySet()) {
+        for (Class<?> key : contadores.keySet()) {
             Contador info = contadores.get(key);
             if (info.getCount() > 0) {
                 nonZero++;

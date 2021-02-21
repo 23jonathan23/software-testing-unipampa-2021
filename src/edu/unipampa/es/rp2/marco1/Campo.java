@@ -1,4 +1,4 @@
-package main.source;
+package edu.unipampa.es.rp2.marco1;
 
 import java.util.Collections;
 import java.util.LinkedList;

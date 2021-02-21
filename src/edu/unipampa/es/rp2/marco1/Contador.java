@@ -1,6 +1,4 @@
-package main.source;
-
-import java.awt.Color;
+package edu.unipampa.es.rp2.marco1;
 
 public class Contador {
     private String name;
