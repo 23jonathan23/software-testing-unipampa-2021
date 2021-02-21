@@ -3,14 +3,14 @@ package edu.unipampa.es.rp2.marco1;
 import java.util.Random;
 
 public class Randomizador {
-    private static final int SEED = 1111;
-    private static final Random RAND = new Random();
+  private static final int SEED = 1111;
+  private static final Random RAND = new Random();
 
-    public static Random getRandom() {
-        return RAND;
-    }
+  public static Random getRandom() {
+    return RAND;
+  }
 
-    public static void reset() {
-        RAND.setSeed(SEED);
-    }
+  public static void reset() {
+    RAND.setSeed(SEED);
+  }
 }
