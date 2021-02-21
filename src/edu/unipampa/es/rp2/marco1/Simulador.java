@@ -46,7 +46,7 @@ public class Simulador {
     }
 
     public void simulacao(int numEtapas) {
-        for (int etapaAtual = 1; etapaAtual <= numEtapas && tela.ehViavel(campo); etapaAtual++) {
+        for (int etapaAtual = 1; etapaAtual <= numEtapas && tela.checarViabilidade(campo); etapaAtual++) {
             simulacaoUmaEtapa();
         }
     }

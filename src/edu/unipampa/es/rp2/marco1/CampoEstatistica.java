@@ -47,7 +47,7 @@ public class CampoEstatistica {
         contadoresValidos = true;
     }
 
-    public boolean ehViavel(Campo campo) {
+    public boolean checarViabilidade(Campo campo) {
         int nonZero = 0;
         if (!contadoresValidos) {
             geraContadores(campo);
