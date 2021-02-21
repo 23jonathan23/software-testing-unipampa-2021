@@ -14,7 +14,7 @@ public class Startup {
     menu(simulador, entradas);
   }
 
-  public static void menu(Simulador simulador, Scanner entradas) {
+  private static void menu(Simulador simulador, Scanner entradas) {
     int comando = 0;
 
     System.out.println("#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#");
@@ -72,7 +72,7 @@ public class Startup {
     }
   }
 
-  public static boolean podeSerConvertidoParaInteiro(String entrada) {
+  private static boolean podeSerConvertidoParaInteiro(String entrada) {
     try {
       Integer.parseInt(entrada);
       return true;
