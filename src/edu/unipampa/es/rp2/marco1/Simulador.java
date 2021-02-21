@@ -7,100 +7,113 @@ import java.util.Iterator;
 import java.awt.Color;
 
 public class Simulador {
-    private static final int LARGURA_PADRAO = 50;
-    private static final int PROFUNDIDADE_PADRAO = 50;
-    private static final double PROBABILIDADE_CRIACAO_LOBOGUARA = 0.02;
-    private static final double PROBABILIDADE_CRIACAO_OVELHA = 0.28;
+	private static final int LARGURA_PADRAO = 50;
+	private static final int PROFUNDIDADE_PADRAO = 50;
+	private static final double PROBABILIDADE_CRIACAO_LOBOGUARA = 0.02;
+	private static final double PROBABILIDADE_CRIACAO_OVELHA = 0.28;
 
-    private List<Ovelha> ovelhas;
-    private List<LoboGuara> lobos;
-    private Campo campo;
-    private int etapa;
-    private SimuladorTela tela;
+	private List<Ovelha> ovelhas;
+	private List<LoboGuara> lobos;
+	private Campo campo;
+	private int etapa;
+	private SimuladorTela tela;
 
-    public Simulador() {
-        this(PROFUNDIDADE_PADRAO, LARGURA_PADRAO);
-    }
+	public Simulador() {
+		this(PROFUNDIDADE_PADRAO, LARGURA_PADRAO);
+	}
 
-    public Simulador(int profundidade, int largura) {
-        if (largura < 0 || profundidade < 0) {
-            System.out.println("As dimensões devem ser maior do que zero.");
-            System.out.println("Usando valores padrões.");
-            profundidade = PROFUNDIDADE_PADRAO;
-            largura = LARGURA_PADRAO;
-        }
+	public Simulador(int profundidade, int largura) {
+		if (largura < 0 || profundidade < 0) {
+			System.out.println("As dimensões devem ser maior do que zero.");
+			System.out.println("Usando valores padrões.");
 
-        ovelhas = new ArrayList<Ovelha>();
-        lobos = new ArrayList<LoboGuara>();
-        campo = new Campo(profundidade, largura);
+			profundidade = PROFUNDIDADE_PADRAO;
+			largura = LARGURA_PADRAO;
+		}
 
-        tela = new SimuladorTela(profundidade, largura);
-        tela.setCor(Ovelha.class, Color.orange);
-        tela.setCor(LoboGuara.class, Color.blue);
+		ovelhas = new ArrayList<Ovelha>();
+		lobos = new ArrayList<LoboGuara>();
+		campo = new Campo(profundidade, largura);
 
-        redefine();
-    }
+		tela = new SimuladorTela(profundidade, largura);
+		tela.setCor(Ovelha.class, Color.orange);
+		tela.setCor(LoboGuara.class, Color.blue);
 
-    public void executaLongaSimulacao() {
-        simulacao(500);
-    }
+		redefine();
+	}
 
-    public void simulacao(int numEtapas) {
-        for (int etapaAtual = 1; etapaAtual <= numEtapas && tela.checarViabilidade(campo); etapaAtual++) {
-            simulacaoUmaEtapa();
-        }
-    }
+	public void executaLongaSimulacao() {
+		simulacao(500);
+	}
 
-    public void simulacaoUmaEtapa() {
-        List<Ovelha> novasOvelhas = new ArrayList<Ovelha>();
-        for (Iterator<Ovelha> it = ovelhas.iterator(); it.hasNext();) {
-            Ovelha ovelha = it.next();
-            ovelha.corre(novasOvelhas);
-            if (!ovelha.estaViva()) {
-                it.remove();
-            }
-        }
+	public void simulacao(int numEtapas) {
+		for (int etapaAtual = 1; etapaAtual <= numEtapas && tela.checarViabilidade(campo); etapaAtual++) {
+			simulacaoUmaEtapa();
+		}
+	}
 
-        List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
-        for (Iterator<LoboGuara> it = lobos.iterator(); it.hasNext();) {
-            LoboGuara loboGuara = it.next();
-            loboGuara.caca(novosLobos);
-            if (!loboGuara.estaVivo()) {
-                it.remove();
-            }
-        }
+	public void simulacaoUmaEtapa() {
+		List<Ovelha> novasOvelhas = new ArrayList<Ovelha>();
 
-        ovelhas.addAll(novasOvelhas);
-        lobos.addAll(novosLobos);
+		for (Iterator<Ovelha> it = ovelhas.iterator(); it.hasNext();) {
+			Ovelha ovelha = it.next();
 
-        etapa++;
-        tela.mostraStatus(etapa, campo);
-    }
+			ovelha.corre(novasOvelhas);
+			
+			if (!ovelha.estaViva()) {
+				it.remove();
+			}
+		}
 
-    public void redefine() {
-        etapa = 0;
-        ovelhas.clear();
-        lobos.clear();
-        povoa();
+		List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
 
-        tela.mostraStatus(etapa, campo);
-    }
+		for (Iterator<LoboGuara> it = lobos.iterator(); it.hasNext();) {
+			LoboGuara loboGuara = it.next();
 
-    private void povoa() {
-        Random rand = Randomizador.getRandom();
-        campo.limpa();
-        for (int linha = 0; linha < campo.getProfundidade(); linha++) {
-            for (int coluna = 0; coluna < campo.getLargura(); coluna++) {
-                if (rand.nextDouble() <= PROBABILIDADE_CRIACAO_LOBOGUARA) {
-                    Localizacao localizacao = new Localizacao(linha, coluna);
-                    LoboGuara loboGuara = new LoboGuara(true, campo, localizacao);
-                    lobos.add(loboGuara);
-                } else if (rand.nextDouble() <= PROBABILIDADE_CRIACAO_OVELHA) {
-                    Localizacao localizacao = new Localizacao(linha, coluna);
-                    Ovelha ovelha = new Ovelha(true, campo, localizacao);
-                    ovelhas.add(ovelha);
-                }
-            }
-        }
-    }
+			loboGuara.caca(novosLobos);
+			
+			if (!loboGuara.estaVivo()) {
+				it.remove();
+			}
+		}
+
+		ovelhas.addAll(novasOvelhas);
+		lobos.addAll(novosLobos);
+
+		etapa++;
+		tela.mostraStatus(etapa, campo);
+	}
+
+	public void redefine() {
+		etapa = 0;
+		ovelhas.clear();
+		lobos.clear();
+		povoa();
+
+		tela.mostraStatus(etapa, campo);
+	}
+
+	private void povoa() {
+		Random random = Randomizador.getRandom();
+
+		campo.limpa();
+
+		for (int linha = 0; linha < campo.getProfundidade(); linha++) {
+			for (int coluna = 0; coluna < campo.getLargura(); coluna++) {
+				if (random.nextDouble() <= PROBABILIDADE_CRIACAO_LOBOGUARA) {
+					Localizacao localizacao = new Localizacao(linha, coluna);
+
+					LoboGuara loboGuara = new LoboGuara(true, campo, localizacao);
+
+					lobos.add(loboGuara);
+				} else if (random.nextDouble() <= PROBABILIDADE_CRIACAO_OVELHA) {
+					Localizacao localizacao = new Localizacao(linha, coluna);
+
+					Ovelha ovelha = new Ovelha(true, campo, localizacao);
+
+					ovelhas.add(ovelha);
+				}
+			}
+		}
+	}
 }
