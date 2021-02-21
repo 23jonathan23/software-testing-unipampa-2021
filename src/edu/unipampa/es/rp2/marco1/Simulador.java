@@ -59,7 +59,7 @@ public class Simulador {
 			Ovelha ovelha = it.next();
 
 			ovelha.corre(novasOvelhas);
-			
+
 			if (!ovelha.estaViva()) {
 				it.remove();
 			}
@@ -71,7 +71,7 @@ public class Simulador {
 			LoboGuara loboGuara = it.next();
 
 			loboGuara.caca(novosLobos);
-			
+
 			if (!loboGuara.estaVivo()) {
 				it.remove();
 			}
