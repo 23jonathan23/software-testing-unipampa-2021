@@ -11,7 +11,7 @@ public class SimuladorTela extends JFrame {
 	private static final Color COR_INDEFINIDA = Color.gray;
 
 	private final String PREFIXO_ETAPA = "Etapa: ";
-	private final String PREFIXO_POPULACAO = "Populacao: ";
+	private final String PREFIXO_POPULACAO = "População: ";
 	private final JLabel rotuloEtapa, populacao;
 	private final VisaoCampo visaoCampo;
 
