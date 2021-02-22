@@ -1,14 +1,10 @@
-package test.source;
+package edu.unipampa.es.rp2.marco1;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import main.source.Campo;
-import main.source.LoboGuara;
-import main.source.Localizacao;
-import main.source.Ovelha;
 
 import static org.junit.jupiter.api.Assertions.*;
 
