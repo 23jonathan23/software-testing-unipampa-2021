@@ -19,44 +19,41 @@ import org.junit.jupiter.api.Test;
 public class LoboGuaraTest {
     private static final int VALOR_FOME_OVELHA = 7;
     private Campo campo;
-    
+
     @BeforeEach
     void init() {
         campo = new Campo(50, 50);
     }
-    
+
     @Test
-    @DisplayName("when the wolf hunts a sheep and found, he eat the she.")
-    void test_when_the_wolf_hunts_a_sheep_and_found_he_eat_the_she() 
-            throws NoSuchMethodException, SecurityException, 
-            IllegalAccessException, IllegalArgumentException, 
+    @DisplayName("When the wolf is hunting and finds a sheep, the wolf eats it")
+    void test_when_the_wolf_is_hunting_and_finds_a_sheep_the_wolf_eats_it()
+            throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException, NoSuchFieldException {
-        //Arrange
+        // Arrange
         Localizacao localizacaoLobo = new Localizacao(0, 0);
         LoboGuara loboGuara = new LoboGuara(true, campo, localizacaoLobo);
-        
+
         Localizacao localizacaoOvelha = new Localizacao(0, 1);
         Ovelha ovelha = new Ovelha(true, campo, localizacaoOvelha);
-        
+
         Field field = LoboGuara.class.getDeclaredField("nivelFome");
         field.setAccessible(true);
-        
+
         List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
-        
-        //Act
+
+        // Act
         loboGuara.caca(novosLobos);
         int nivelFomeNow = field.getInt(loboGuara);
 
-        //Assert
-        assertAll("validation",
-            () -> {
-                assertEquals(VALOR_FOME_OVELHA, nivelFomeNow);
-                assertNotEquals(true, ovelha.estaViva());
-            }
-        );
+        // Assert
+        assertAll("validation", () -> {
+            assertEquals(VALOR_FOME_OVELHA, nivelFomeNow);
+            assertNotEquals(true, ovelha.estaViva());
+        });
     }
 }
 
-//Method method = LoboGuara.class.getDeclaredMethod("procria");
-//method.setAccessible(true);
-//int nascimentos = (int) method.invoke(loboGuara);
+// Method method = LoboGuara.class.getDeclaredMethod("procria");
+// method.setAccessible(true);
+// int nascimentos = (int) method.invoke(loboGuara);
