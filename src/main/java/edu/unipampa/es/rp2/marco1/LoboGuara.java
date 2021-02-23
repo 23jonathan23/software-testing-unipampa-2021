@@ -9,8 +9,9 @@ public class LoboGuara extends Animal{
     private int nivelFome;
 
     public LoboGuara(boolean idadeRandomica, Campo campo, Localizacao localizacao) {
-        idade = 0;
-        vivo = true;
+       
+//        idade = 0;
+//        vivo = true;
         this.campo = campo;
         
         IDADE_PROCRIACAO = 10;

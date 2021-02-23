@@ -9,9 +9,6 @@ public class Ovelha extends Animal {
         IDADE_MAXIMA = 40;
         PROBABILIDADE_PROCRIACAO = 0.15;
         TAMANHO_MAXIMO_NINHADA = 4;
-
-        idade = 0;
-        vivo = true;
         this.campo = campo;
         setLocalizacao(localizacao);
         if (randomAge) {

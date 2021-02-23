@@ -19,7 +19,12 @@ public abstract class Animal {
     protected boolean vivo;
     protected Localizacao localizacao;
     protected Campo campo;  
-
+    
+    public Animal(){
+        vivo = true;
+        idade = 0;
+    }
+    
     protected abstract void incrementaIdade();
     protected abstract void setMorte();
     protected abstract boolean podeProcriar();
