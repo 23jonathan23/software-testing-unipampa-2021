@@ -27,5 +27,4 @@ public abstract class Animal {
     protected abstract void setLocalizacao(Localizacao localizacao);
     protected abstract  Localizacao getLocalizacao();
 
-
 }

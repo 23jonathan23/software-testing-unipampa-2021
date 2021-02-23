@@ -2,28 +2,21 @@ package main.java.edu.unipampa.es.rp2.marco1;
 
 import java.util.List;
 import java.util.Iterator;
-import java.util.Random;
 
-public class LoboGuara {
+public class LoboGuara extends Animal{
 
-    private static final int IDADE_PROCRIACAO = 10;
-    private static final int IDADE_MAXIMA = 150;
-    private static final double PROBABILIDADE_PROCRIACAO = 0.75;
-    private static final int TAMANHO_MAXIMO_NINHADA = 5;
     private static final int VALOR_FOME_OVELHA = 7;
-    private static final Random rand = Randomizador.getRandom();
-
-    private int idade;
-    private boolean vivo;
-    private Localizacao localizacao;
-    private Campo campo;
     private int nivelFome;
 
     public LoboGuara(boolean idadeRandomica, Campo campo, Localizacao localizacao) {
         idade = 0;
         vivo = true;
         this.campo = campo;
-
+        
+        IDADE_PROCRIACAO = 10;
+        IDADE_MAXIMA = 150;
+        PROBABILIDADE_PROCRIACAO = 0.75;
+        TAMANHO_MAXIMO_NINHADA = 5;
         setLocalizacao(localizacao);
 
         if (idadeRandomica) {
@@ -59,11 +52,13 @@ public class LoboGuara {
         return vivo;
     }
 
-    public Localizacao getLocalizacao() {
+    @Override
+    protected Localizacao getLocalizacao() {
         return localizacao;
     }
 
-    private void setLocalizacao(Localizacao newLocalizacao) {
+    @Override
+    protected void setLocalizacao(Localizacao newLocalizacao) {
         if (localizacao != null) {
             campo.limpa(localizacao);
         }
@@ -72,7 +67,8 @@ public class LoboGuara {
         campo.lugar(this, newLocalizacao);
     }
 
-    private void incrementaIdade() {
+    @Override
+    protected void incrementaIdade() {
         idade++;
 
         if (idade > IDADE_MAXIMA) {
@@ -121,7 +117,8 @@ public class LoboGuara {
         }
     }
 
-    private int procria() {
+    @Override
+    protected int procria() {
         int nascimentos = 0;
 
         if (podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
@@ -131,11 +128,13 @@ public class LoboGuara {
         return nascimentos;
     }
 
-    private boolean podeProcriar() {
+    @Override
+    protected boolean podeProcriar() {
         return idade >= IDADE_PROCRIACAO;
     }
 
-    private void setMorte() {
+    @Override
+    protected void setMorte() {
         vivo = false;
 
         if (localizacao != null) {

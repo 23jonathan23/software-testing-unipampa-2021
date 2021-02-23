@@ -1,8 +1,6 @@
 package main.java.edu.unipampa.es.rp2.marco1;
 
 import java.util.List;
-import java.util.Random;
-
 public class Ovelha extends Animal {
 
     public Ovelha(boolean randomAge, Campo campo, Localizacao localizacao) {
