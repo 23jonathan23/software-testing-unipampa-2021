@@ -10,10 +10,7 @@ public class LoboGuara extends Animal{
 
     public LoboGuara(boolean idadeRandomica, Campo campo, Localizacao localizacao) {
        
-//        idade = 0;
-//        vivo = true;
-        this.campo = campo;
-        
+        this.campo = campo;        
         IDADE_PROCRIACAO = 10;
         IDADE_MAXIMA = 150;
         PROBABILIDADE_PROCRIACAO = 0.75;
