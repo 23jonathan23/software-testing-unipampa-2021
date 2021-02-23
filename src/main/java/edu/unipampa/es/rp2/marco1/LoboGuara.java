@@ -18,8 +18,8 @@ public class LoboGuara extends Animal{
         setLocalizacao(localizacao);
 
         if (idadeRandomica) {
-            idade = rand.nextInt(IDADE_MAXIMA);
-            nivelFome = rand.nextInt(VALOR_FOME_OVELHA);
+            idade = RAND.nextInt(IDADE_MAXIMA);
+            nivelFome = RAND.nextInt(VALOR_FOME_OVELHA);
         } else {
             nivelFome = VALOR_FOME_OVELHA;
         }
@@ -119,8 +119,8 @@ public class LoboGuara extends Animal{
     protected int procria() {
         int nascimentos = 0;
 
-        if (podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
-            nascimentos = rand.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
+        if (podeProcriar() && RAND.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
+            nascimentos = RAND.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
         }
 
         return nascimentos;

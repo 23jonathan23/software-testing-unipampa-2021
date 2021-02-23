@@ -12,7 +12,7 @@ public class Ovelha extends Animal {
         this.campo = campo;
         setLocalizacao(localizacao);
         if (randomAge) {
-            idade = rand.nextInt(IDADE_MAXIMA);
+            idade = RAND.nextInt(IDADE_MAXIMA);
         }
     }
 
@@ -85,8 +85,8 @@ public class Ovelha extends Animal {
     protected int procria() {
         int nascimentos = 0;
 
-        if (podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
-            nascimentos = rand.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
+        if (podeProcriar() && RAND.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
+            nascimentos = RAND.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
         }
 
         return nascimentos;

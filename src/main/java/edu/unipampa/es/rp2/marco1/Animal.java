@@ -13,7 +13,7 @@ public abstract class Animal {
     protected static  int IDADE_MAXIMA;
     protected static double PROBABILIDADE_PROCRIACAO;
     protected static  int TAMANHO_MAXIMO_NINHADA;    
-    protected static Random rand = Randomizador.getRandom();
+    protected static Random RAND = Randomizador.getRandom();
 
     protected int idade;
     protected boolean vivo;
