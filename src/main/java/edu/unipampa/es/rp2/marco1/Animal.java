@@ -1,12 +1,13 @@
 package main.java.edu.unipampa.es.rp2.marco1;
 
+import java.util.List;
 import java.util.Random;
 
 /**
  *
  * @author Rafael
  */
-public class Animal {
+public abstract class Animal {
     
     protected static int IDADE_PROCRIACAO;
     protected static  int IDADE_MAXIMA;
@@ -18,4 +19,14 @@ public class Animal {
     protected boolean vivo;
     protected Localizacao localizacao;
     protected Campo campo;  
+
+
+    protected abstract void incrementaIdade();
+    protected abstract void setMorte();
+    protected abstract boolean podeProcriar();
+    protected abstract int procria();
+    protected abstract void setLocalizacao(Localizacao localizacao);
+    protected abstract  Localizacao getLocalizacao();
+
+
 }
