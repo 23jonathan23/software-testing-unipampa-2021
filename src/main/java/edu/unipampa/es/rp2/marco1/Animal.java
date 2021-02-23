@@ -20,7 +20,6 @@ public abstract class Animal {
     protected Localizacao localizacao;
     protected Campo campo;  
 
-
     protected abstract void incrementaIdade();
     protected abstract void setMorte();
     protected abstract boolean podeProcriar();

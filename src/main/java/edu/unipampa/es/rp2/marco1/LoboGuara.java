@@ -5,142 +5,143 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class LoboGuara {
-	private static final int IDADE_PROCRIACAO = 10;
-	private static final int IDADE_MAXIMA = 150;
-	private static final double PROBABILIDADE_PROCRIACAO = 0.75;
-	private static final int TAMANHO_MAXIMO_NINHADA = 5;
-	private static final int VALOR_FOME_OVELHA = 7;
-	private static final Random rand = Randomizador.getRandom();
 
-	private int idade;
-	private boolean vivo;
-	private Localizacao localizacao;
-	private Campo campo;
-	private int nivelFome;
+    private static final int IDADE_PROCRIACAO = 10;
+    private static final int IDADE_MAXIMA = 150;
+    private static final double PROBABILIDADE_PROCRIACAO = 0.75;
+    private static final int TAMANHO_MAXIMO_NINHADA = 5;
+    private static final int VALOR_FOME_OVELHA = 7;
+    private static final Random rand = Randomizador.getRandom();
 
-	public LoboGuara(boolean idadeRandomica, Campo campo, Localizacao localizacao) {
-		idade = 0;
-		vivo = true;
-		this.campo = campo;
+    private int idade;
+    private boolean vivo;
+    private Localizacao localizacao;
+    private Campo campo;
+    private int nivelFome;
 
-		setLocalizacao(localizacao);
+    public LoboGuara(boolean idadeRandomica, Campo campo, Localizacao localizacao) {
+        idade = 0;
+        vivo = true;
+        this.campo = campo;
 
-		if (idadeRandomica) {
-			idade = rand.nextInt(IDADE_MAXIMA);
-			nivelFome = rand.nextInt(VALOR_FOME_OVELHA);
-		} else {
-			nivelFome = VALOR_FOME_OVELHA;
-		}
-	}
+        setLocalizacao(localizacao);
 
-	public void caca(List<LoboGuara> novosLobos) {
-		incrementaIdade();
+        if (idadeRandomica) {
+            idade = rand.nextInt(IDADE_MAXIMA);
+            nivelFome = rand.nextInt(VALOR_FOME_OVELHA);
+        } else {
+            nivelFome = VALOR_FOME_OVELHA;
+        }
+    }
 
-		if (vivo) {
-			daALuz(novosLobos);
+    public void caca(List<LoboGuara> novosLobos) {
+        incrementaIdade();
 
-			Localizacao newLocalizacao = procuraComida(localizacao);
+        if (vivo) {
+            daALuz(novosLobos);
 
-			if (newLocalizacao == null) {
-				newLocalizacao = campo.localizacaoAdjacenteLivre(localizacao);
-				incrementaFome();
-			}
+            Localizacao newLocalizacao = procuraComida(localizacao);
 
-			if (newLocalizacao != null && vivo) {
-				setLocalizacao(newLocalizacao);
-			} else {
-				setMorte();
-			}
-		}
-	}
+            if (newLocalizacao == null) {
+                newLocalizacao = campo.localizacaoAdjacenteLivre(localizacao);
+                incrementaFome();
+            }
 
-	public boolean estaVivo() {
-		return vivo;
-	}
+            if (newLocalizacao != null && vivo) {
+                setLocalizacao(newLocalizacao);
+            } else {
+                setMorte();
+            }
+        }
+    }
 
-	public Localizacao getLocalizacao() {
-		return localizacao;
-	}
+    public boolean estaVivo() {
+        return vivo;
+    }
 
-	private void setLocalizacao(Localizacao newLocalizacao) {
-		if (localizacao != null) {
-			campo.limpa(localizacao);
-		}
+    public Localizacao getLocalizacao() {
+        return localizacao;
+    }
 
-		localizacao = newLocalizacao;
-		campo.lugar(this, newLocalizacao);
-	}
+    private void setLocalizacao(Localizacao newLocalizacao) {
+        if (localizacao != null) {
+            campo.limpa(localizacao);
+        }
 
-	private void incrementaIdade() {
-		idade++;
+        localizacao = newLocalizacao;
+        campo.lugar(this, newLocalizacao);
+    }
 
-		if (idade > IDADE_MAXIMA) {
-			setMorte();
-		}
-	}
+    private void incrementaIdade() {
+        idade++;
 
-	private void incrementaFome() {
-		nivelFome--;
+        if (idade > IDADE_MAXIMA) {
+            setMorte();
+        }
+    }
 
-		if (nivelFome == 0) {
-			setMorte();
-		}
-	}
+    private void incrementaFome() {
+        nivelFome--;
 
-	private Localizacao procuraComida(Localizacao localizacao) {
-		List<Localizacao> adjacente = campo.localizacoesAdjacentes(localizacao);
-		Iterator<Localizacao> it = adjacente.iterator();
-		
-		while (it.hasNext()) {
-			Localizacao onde = it.next();
-			Object animal = campo.getObjectAt(onde);
+        if (nivelFome == 0) {
+            setMorte();
+        }
+    }
 
-			if (animal != null && animal instanceof Ovelha) {
-				Ovelha ovelha = (Ovelha) animal;
+    private Localizacao procuraComida(Localizacao localizacao) {
+        List<Localizacao> adjacente = campo.localizacoesAdjacentes(localizacao);
+        Iterator<Localizacao> it = adjacente.iterator();
 
-				ovelha.setMorte();
-				nivelFome = VALOR_FOME_OVELHA;
+        while (it.hasNext()) {
+            Localizacao onde = it.next();
+            Object animal = campo.getObjectAt(onde);
 
-				return onde;
-			}
-		}
+            if (animal != null && animal instanceof Ovelha) {
+                Ovelha ovelha = (Ovelha) animal;
 
-		return null;
-	}
+                ovelha.setMorte();
+                nivelFome = VALOR_FOME_OVELHA;
 
-	private void daALuz(List<LoboGuara> novosLobos) {
-		List<Localizacao> livre = campo.localizacoesAdjacentesLivres(localizacao);
-		int nascimentos = procria();
-		int n = livre.size();
+                return onde;
+            }
+        }
 
-		for (int b = 0; b < n && b < nascimentos; b++) {
-			Localizacao loc = livre.remove(0);
-			LoboGuara jovem = new LoboGuara(false, campo, loc);
-			novosLobos.add(jovem);
-		}
-	}
+        return null;
+    }
 
-	private int procria() {
-		int nascimentos = 0;
+    private void daALuz(List<LoboGuara> novosLobos) {
+        List<Localizacao> livre = campo.localizacoesAdjacentesLivres(localizacao);
+        int nascimentos = procria();
+        int n = livre.size();
 
-		if (podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
-			nascimentos = rand.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
-		}
+        for (int b = 0; b < n && b < nascimentos; b++) {
+            Localizacao loc = livre.remove(0);
+            LoboGuara jovem = new LoboGuara(false, campo, loc);
+            novosLobos.add(jovem);
+        }
+    }
 
-		return nascimentos;
-	}
+    private int procria() {
+        int nascimentos = 0;
 
-	private boolean podeProcriar() {
-		return idade >= IDADE_PROCRIACAO;
-	}
+        if (podeProcriar() && rand.nextDouble() <= PROBABILIDADE_PROCRIACAO) {
+            nascimentos = rand.nextInt(TAMANHO_MAXIMO_NINHADA) + 1;
+        }
 
-	private void setMorte() {
-		vivo = false;
-		
-		if (localizacao != null) {
-			campo.limpa(localizacao);
-			localizacao = null;
-			campo = null;
-		}
-	}
+        return nascimentos;
+    }
+
+    private boolean podeProcriar() {
+        return idade >= IDADE_PROCRIACAO;
+    }
+
+    private void setMorte() {
+        vivo = false;
+
+        if (localizacao != null) {
+            campo.limpa(localizacao);
+            localizacao = null;
+            campo = null;
+        }
+    }
 }
