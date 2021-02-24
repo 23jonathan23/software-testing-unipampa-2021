@@ -9,10 +9,10 @@ import java.util.Random;
  */
 public abstract class Animal {
     
-    protected static int IDADE_PROCRIACAO;
-    protected static  int IDADE_MAXIMA;
-    protected static double PROBABILIDADE_PROCRIACAO;
-    protected static  int TAMANHO_MAXIMO_NINHADA;    
+    protected int IDADE_PROCRIACAO;
+    protected int IDADE_MAXIMA;
+    protected double PROBABILIDADE_PROCRIACAO;
+    protected int TAMANHO_MAXIMO_NINHADA;
     protected static Random RAND = Randomizador.getRandom();
 
     protected int idade;
