@@ -1,4 +1,4 @@
-package edu.unipampa.es.rp2.marco1;
+package main.java.edu.unipampa.es.rp2.marco1;
 
 public class Localizacao {
 	private final int linha;
