@@ -1,4 +1,4 @@
-package main.java.edu.unipampa.es.rp2.marco1;
+package edu.unipampa.es.rp2.marco1;
 
 import java.util.HashMap;
 
@@ -84,7 +84,7 @@ public class CampoEstatistica {
         }
       }
     }
-    
+
     contadoresValidos = true;
   }
 }

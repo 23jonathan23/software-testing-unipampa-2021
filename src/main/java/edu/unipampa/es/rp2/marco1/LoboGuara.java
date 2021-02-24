@@ -1,16 +1,16 @@
-package main.java.edu.unipampa.es.rp2.marco1;
+package edu.unipampa.es.rp2.marco1;
 
 import java.util.List;
 import java.util.Iterator;
 
-public class LoboGuara extends Animal{
+public class LoboGuara extends Animal {
 
     private static final int VALOR_FOME_OVELHA = 7;
     private int nivelFome;
 
     public LoboGuara(boolean idadeRandomica, Campo campo, Localizacao localizacao) {
-       
-        this.campo = campo;        
+
+        this.campo = campo;
         IDADE_PROCRIACAO = 10;
         IDADE_MAXIMA = 150;
         PROBABILIDADE_PROCRIACAO = 0.75;
