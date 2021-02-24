@@ -1,4 +1,4 @@
-package main.java.edu.unipampa.es.rp2.marco1;
+package edu.unipampa.es.rp2.marco1;
 
 public class Localizacao {
 	private final int linha;
@@ -13,7 +13,7 @@ public class Localizacao {
 	public boolean equals(Object obj) {
 		if (obj instanceof Localizacao) {
 			Localizacao outra = (Localizacao) obj;
-			
+
 			return linha == outra.getLinha() && coluna == outra.getColuna();
 		} else {
 			return false;

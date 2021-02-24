@@ -1,10 +1,11 @@
-package main.java.edu.unipampa.es.rp2.marco1;
+package edu.unipampa.es.rp2.marco1;
 
 import java.util.List;
+
 public class Ovelha extends Animal {
 
     public Ovelha(boolean randomAge, Campo campo, Localizacao localizacao) {
-        
+
         IDADE_PROCRIACAO = 5;
         IDADE_MAXIMA = 40;
         PROBABILIDADE_PROCRIACAO = 0.15;
@@ -50,7 +51,7 @@ public class Ovelha extends Animal {
     protected Localizacao getLocalizacao() {
         return localizacao;
     }
-  
+
     @Override
     protected void setLocalizacao(Localizacao newLocalizacao) {
         if (localizacao != null) {
@@ -69,7 +70,7 @@ public class Ovelha extends Animal {
             setMorte();
         }
     }
-  
+
     private void daALuz(List<Ovelha> novasOvelhas) {
         List<Localizacao> livre = campo.localizacoesAdjacentesLivres(localizacao);
         int nascimentos = procria();
@@ -97,5 +98,4 @@ public class Ovelha extends Animal {
         return idade >= IDADE_PROCRIACAO;
     }
 
-  
 }

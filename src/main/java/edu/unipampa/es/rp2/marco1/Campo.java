@@ -1,4 +1,4 @@
-package main.java.edu.unipampa.es.rp2.marco1;
+package edu.unipampa.es.rp2.marco1;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -98,7 +98,7 @@ public class Campo {
 
       Collections.shuffle(localizacoes, RAND);
     }
-    
+
     return localizacoes;
   }
 

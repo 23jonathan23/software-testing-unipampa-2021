@@ -1,4 +1,4 @@
-package main.java.edu.unipampa.es.rp2.marco1;
+package edu.unipampa.es.rp2.marco1;
 
 import java.awt.*;
 import javax.swing.*;
@@ -122,7 +122,7 @@ public class SimuladorTela extends JFrame {
 				}
 
 				yScale = size.height / gridHeight;
-				
+
 				if (yScale < 1) {
 					yScale = GRID_VIEW_SCALING_FACTOR;
 				}
