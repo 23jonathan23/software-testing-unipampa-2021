@@ -25,11 +25,11 @@ public class LoboGuaraTest {
         // Arrange
         int xPositionLobo = 0;
         int yPositionLobo = 0;
-        var loboGuara = (LoboGuara) CreateArrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
+        var loboGuara = (LoboGuara) Arrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
 
         int xPositionOvelha = 0;
         int yPositionOvelha = 1;
-        var ovelha = (Ovelha) CreateArrange(OVELHA, xPositionOvelha, yPositionOvelha);
+        var ovelha = (Ovelha) Arrange(OVELHA, xPositionOvelha, yPositionOvelha);
 
         List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
 
@@ -46,11 +46,11 @@ public class LoboGuaraTest {
         // Arrange
         int xPositionLobo = 0;
         int yPositionLobo = 0;
-        var loboGuara = (LoboGuara) CreateArrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
+        var loboGuara = (LoboGuara) Arrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
 
         int xPositionOvelha = 2;
         int yPositionOvelha = 10;
-        var ovelha = (Ovelha) CreateArrange(OVELHA, xPositionOvelha, yPositionOvelha);
+        var ovelha = (Ovelha) Arrange(OVELHA, xPositionOvelha, yPositionOvelha);
 
         List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
 
@@ -62,12 +62,12 @@ public class LoboGuaraTest {
     }
 
     @Test
-    @DisplayName("When the wolf reaches the max age, the wolf must die")
-    void test_when_the_wolf_reaches_the_max_age_the_wolf_must_die() {
+    @DisplayName("The wolf must die when it reaches max age")
+    void test_the_wolf_must_die_when_it_reaches_max_age() {
         // Arrange
         int xPositionLobo = 0;
         int yPositionLobo = 0;
-        var loboGuara = (LoboGuara) CreateArrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
+        var loboGuara = (LoboGuara) Arrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
         loboGuara.idade = loboGuara.IDADE_MAXIMA;
 
         // Act
@@ -78,14 +78,15 @@ public class LoboGuaraTest {
     }
 
     @Test
-    @DisplayName("When the wolf to change his location, the wolf must to moving for new location on the fild.")
-    void test_when_the_wolf_to_change_his_location_the_wolf_must_to_moving_for_new_location_on_the_fild() {
+    @DisplayName("The wolf must move to new location on the field when it changes its location")
+    void test_the_wolf_must_move_to_new_location_on_the_field_when_it_changes_its_location() {
         // Arrange
         int xPositionLobo = 0;
         int yPositionLobo = 0;
-        var loboGuara = (LoboGuara) CreateArrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
+        var loboGuara = (LoboGuara) Arrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
 
         var newLocalizacao = new Localizacao(xPositionLobo++, yPositionLobo++);
+
         // Act
         loboGuara.setLocalizacao(newLocalizacao);
 
@@ -93,13 +94,11 @@ public class LoboGuaraTest {
         assertNotNull(campo.getObjectAt(newLocalizacao));
     }
 
-    private Animal CreateArrange(String typeEntity, int xPosition, int yPosition) {
-        Localizacao localizacao = new Localizacao(xPosition, yPosition);
-
+    private Animal Arrange(String typeEntity, int xPosition, int yPosition) {
         if (typeEntity.equals(LOBO_GUARA)) {
-            return new LoboGuara(true, campo, localizacao);
+            return new LoboGuara(true, campo, new Localizacao(xPosition, yPosition));
         }
 
-        return new Ovelha(true, campo, localizacao);
+        return new Ovelha(true, campo, new Localizacao(xPosition, yPosition));
     }
 }
