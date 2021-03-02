@@ -26,7 +26,7 @@ public class LoboGuaraTest {
         // Arrange
         var loboGuara = new LoboGuara(RANDOM_AGE, campo, new Localizacao(loboGuaraXPosition, loboGuaraYPosition));
 
-        var ovelha = new Ovelha(true, campo, new Localizacao(0, 1));
+        var ovelha = new Ovelha(RANDOM_AGE, campo, new Localizacao(0, 1));
 
         List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
 
