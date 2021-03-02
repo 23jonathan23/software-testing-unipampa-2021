@@ -1,4 +1,3 @@
-
 package edu.unipampa.es.rp2.marco1;
 
 import org.junit.Test;
@@ -43,7 +42,7 @@ public class OvelhaTest {
     }
     
     @Test
-    public void testTheSheepNeverGivesBirthToMoreThenTheSpaceAvailableIntCampo() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException{
+    public void testTheSheepNeverGivesBirthToMoreThenTheSpaceAvailableInCampo() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException{
         Localizacao localizacao = new Localizacao(10, 0);
         Ovelha ovelha = new Ovelha(true, campo, localizacao);
         int n = ovelha.procria();
