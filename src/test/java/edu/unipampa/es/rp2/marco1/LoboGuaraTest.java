@@ -10,8 +10,8 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 
 public class LoboGuaraTest {
-    private final String LOBO_GUARA = "LOBO_GUARA";
-    private final String OVELHA = "OVELHA";
+    private int loboGuaraXPosition = 0;
+    private int loboGuaraYPosition = 0;
     private Campo campo;
 
     @BeforeEach
@@ -23,13 +23,9 @@ public class LoboGuaraTest {
     @DisplayName("When the wolf is hunting and finds a sheep, the wolf eats it")
     void test_when_the_wolf_is_hunting_and_finds_a_sheep_the_wolf_eats_it() {
         // Arrange
-        int xPositionLobo = 0;
-        int yPositionLobo = 0;
-        var loboGuara = (LoboGuara) Arrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
+        var loboGuara = new LoboGuara(true, campo, new Localizacao(loboGuaraXPosition, loboGuaraYPosition));
 
-        int xPositionOvelha = 0;
-        int yPositionOvelha = 1;
-        var ovelha = (Ovelha) Arrange(OVELHA, xPositionOvelha, yPositionOvelha);
+        var ovelha = new Ovelha(true, campo, new Localizacao(0, 1));
 
         List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
 
@@ -44,13 +40,9 @@ public class LoboGuaraTest {
     @DisplayName("When the wolf is hunting and not find a sheep, the wolf not eats it")
     void test_when_the_wolf_is_hunting_and_not_find_a_sheep_the_wolf_not_eats_it() {
         // Arrange
-        int xPositionLobo = 0;
-        int yPositionLobo = 0;
-        var loboGuara = (LoboGuara) Arrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
+        var loboGuara = new LoboGuara(true, campo, new Localizacao(loboGuaraXPosition, loboGuaraYPosition));
 
-        int xPositionOvelha = 2;
-        int yPositionOvelha = 10;
-        var ovelha = (Ovelha) Arrange(OVELHA, xPositionOvelha, yPositionOvelha);
+        var ovelha = new Ovelha(true, campo, new Localizacao(2, 10));
 
         List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
 
@@ -65,9 +57,7 @@ public class LoboGuaraTest {
     @DisplayName("The wolf must die when it reaches max age")
     void test_the_wolf_must_die_when_it_reaches_max_age() {
         // Arrange
-        int xPositionLobo = 0;
-        int yPositionLobo = 0;
-        var loboGuara = (LoboGuara) Arrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
+        var loboGuara = new LoboGuara(true, campo, new Localizacao(loboGuaraXPosition, loboGuaraYPosition));
         loboGuara.idade = loboGuara.IDADE_MAXIMA;
 
         // Act
@@ -81,24 +71,14 @@ public class LoboGuaraTest {
     @DisplayName("The wolf must move to new location on the field when it changes its location")
     void test_the_wolf_must_move_to_new_location_on_the_field_when_it_changes_its_location() {
         // Arrange
-        int xPositionLobo = 0;
-        int yPositionLobo = 0;
-        var loboGuara = (LoboGuara) Arrange(LOBO_GUARA, xPositionLobo, yPositionLobo);
+        var loboGuara = new LoboGuara(true, campo, new Localizacao(loboGuaraXPosition, loboGuaraYPosition));
 
-        var newLocalizacao = new Localizacao(xPositionLobo++, yPositionLobo++);
+        var newLocalizacao = new Localizacao(loboGuaraXPosition++, loboGuaraYPosition++);
 
         // Act
         loboGuara.setLocalizacao(newLocalizacao);
 
         // Assert
         assertNotNull(campo.getObjectAt(newLocalizacao));
-    }
-
-    private Animal Arrange(String typeEntity, int xPosition, int yPosition) {
-        if (typeEntity.equals(LOBO_GUARA)) {
-            return new LoboGuara(true, campo, new Localizacao(xPosition, yPosition));
-        }
-
-        return new Ovelha(true, campo, new Localizacao(xPosition, yPosition));
     }
 }
