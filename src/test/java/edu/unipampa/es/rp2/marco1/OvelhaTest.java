@@ -42,7 +42,7 @@ public class OvelhaTest {
     }
     
     @Test
-    public void testTheSheepNeverGivesBirthToMoreThenTheSpaceAvailableInCampo() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException{
+    public void testTheSheepNeverGivesBirthToMoreThanTheSpaceAvailableInCampo() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException{
         Localizacao localizacao = new Localizacao(10, 0);
         Ovelha ovelha = new Ovelha(true, campo, localizacao);
         int n = ovelha.procria();
