@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 public class LoboGuaraTest {
     private int loboGuaraXPosition = 0;
     private int loboGuaraYPosition = 0;
+    private int ovelhaXPosition = 0;
+    private int ovelhaYPosition = 0;
     private final boolean RANDOM_AGE = true;
     private Campo campo;
 
@@ -26,7 +28,7 @@ public class LoboGuaraTest {
         // Arrange
         var loboGuara = new LoboGuara(RANDOM_AGE, campo, new Localizacao(loboGuaraXPosition, loboGuaraYPosition));
 
-        var ovelha = new Ovelha(RANDOM_AGE, campo, new Localizacao(0, 1));
+        var ovelha = new Ovelha(RANDOM_AGE, campo, new Localizacao(ovelhaXPosition, ++ovelhaYPosition));
 
         List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
 
@@ -43,7 +45,7 @@ public class LoboGuaraTest {
         // Arrange
         var loboGuara = new LoboGuara(RANDOM_AGE, campo, new Localizacao(loboGuaraXPosition, loboGuaraYPosition));
 
-        var ovelha = new Ovelha(RANDOM_AGE, campo, new Localizacao(2, 10));
+        var ovelha = new Ovelha(RANDOM_AGE, campo, new Localizacao((ovelhaXPosition += 2), (ovelhaYPosition += 10)));
 
         List<LoboGuara> novosLobos = new ArrayList<LoboGuara>();
 
@@ -74,7 +76,7 @@ public class LoboGuaraTest {
         // Arrange
         var loboGuara = new LoboGuara(RANDOM_AGE, campo, new Localizacao(loboGuaraXPosition, loboGuaraYPosition));
 
-        var newLocalizacao = new Localizacao(loboGuaraXPosition++, loboGuaraYPosition++);
+        var newLocalizacao = new Localizacao(++loboGuaraXPosition, ++loboGuaraYPosition);
 
         // Act
         loboGuara.setLocalizacao(newLocalizacao);
