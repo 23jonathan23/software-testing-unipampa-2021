@@ -5,7 +5,7 @@ public class Contador {
   private int count;
 
   public Contador(String name) {
-    this.name = name.substring(12);
+    this.name = name.substring(27);
     count = 0;
   }
 
