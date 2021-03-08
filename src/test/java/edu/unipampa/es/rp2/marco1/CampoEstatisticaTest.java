@@ -4,6 +4,10 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -76,6 +80,93 @@ public class CampoEstatisticaTest {
     var population = campoEstatistica.getPopulationDetails(campo).replaceAll("[\\D]", "").split("");
     var populationQtd = Integer.parseInt(population[0]);
     assertEquals(expectedPopulation, populationQtd);
+  }
+
+  @Test
+  @DisplayName("When the method checkVisibility is called and counters is valid, the method generateCounters don´t must be called")
+  void when_the_method_checkVisibility_is_called_and_counters_is_valid_the_method_generateCounters_dont_must_be_called() {
+    // Arange
+    var campoEstatistica = Mockito.spy(new CampoEstatistica());
+
+    // Act
+    campoEstatistica.checarViabilidade(campo);
+
+    // Assert
+    verify(campoEstatistica, times(0)).redefine();
+  }
+
+  @Test
+  @DisplayName("When the method checkVisibility is called and counters isn't valid, the method generateCounters must be called")
+  void when_the_method_checkVisibility_is_called_and_counters_isnt_valid_the_method_generateCounters_must_be_called() {
+    // Arange
+    var campoEstatistica = Mockito.spy(new CampoEstatistica());
+    campoEstatistica.redefine();
+
+    // Act
+    campoEstatistica.checarViabilidade(campo);
+
+    // Assert
+    verify(campoEstatistica, times(2)).redefine();
+  }
+
+  @Test
+  @DisplayName("When the method checkVisibility is called and the field contains more than one occupied positions, its should return true")
+  void when_the_method_checkVisibility_is_called_and_the_field_contains_more_than_one_occupied_positions_its_should_return_true() {
+    // Arange
+    var campoEstatistica = Mockito.spy(new CampoEstatistica());
+    campoEstatistica.redefine();
+
+    // Act and Assert
+    assertTrue(campoEstatistica.checarViabilidade(campo));
+  }
+
+  @Test
+  @DisplayName("When the method checkVisibility is called and the field doesn't contains more than one occupied positions, its should return false")
+  void when_the_method_checkVisibility_is_called_and_the_field_doesnt_contains_more_than_one_occupied_positions_its_should_return_true() {
+    // Arange
+    var campoEstatistica = Mockito.spy(new CampoEstatistica());
+    campoEstatistica.incrementaContador(LoboGuara.class);
+
+    // Act and Assert
+    assertFalse(campoEstatistica.checarViabilidade(campo));
+  }
+
+  @Test
+  @DisplayName("When the method generateCounters is called and the field contains occupied positions, the method incrementCounters should be called")
+  void when_the_method_generateCounters_is_called_and_the_field_contains_occupied_positions_the_method_incrementCounters_should_be_called()
+      throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
+      InvocationTargetException {
+    // Arange
+    var campoEstatistica = Mockito.spy(new CampoEstatistica());
+
+    Method method = CampoEstatistica.class.getDeclaredMethod("geraContadores", Campo.class);
+    method.setAccessible(true);
+
+    // Act
+    method.invoke(campoEstatistica, campo);
+
+    // Assert
+    verify(campoEstatistica, times(2)).incrementaContador(Mockito.any());
+  }
+
+  @Test
+  @DisplayName("When the method generateCounters is called and the field doesn't contains occupied positions, the method incrementCounters not should be called")
+  void when_the_method_generateCounters_is_called_and_the_field_doesnt_contains_occupied_positions_the_method_incrementCounters_not_should_be_called()
+      throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
+      InvocationTargetException {
+    // Arange
+    var campoMock = Mockito.spy(new Campo(50, 50));
+
+    var campoEstatistica = Mockito.spy(new CampoEstatistica());
+
+    Method method = CampoEstatistica.class.getDeclaredMethod("geraContadores", Campo.class);
+    method.setAccessible(true);
+
+    // Act
+    method.invoke(campoEstatistica, campoMock);
+
+    // Assert
+    verify(campoEstatistica, times(0)).incrementaContador(Mockito.any());
   }
 
   private void Setup() {
