@@ -44,8 +44,7 @@ public class OvelhaTest {
     public void testTheSheepNeverGivesBirthToMoreThanTheSpaceAvailableInCampo()
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException {
         Localizacao localizacao = new Localizacao(10, 0);
-        Ovelha ovelha = new Ovelha(true, campo, localizacao);
-        int n = ovelha.procria();
+        var ovelha = new Ovelha(true, campo, localizacao);
         List<Localizacao> espacoLivre = campo.localizacoesAdjacentesLivres(localizacao);
         List<Ovelha> arrayOvelha = new ArrayList<Ovelha>();
         Method method = Ovelha.class.getDeclaredMethod("daALuz", List.class);
