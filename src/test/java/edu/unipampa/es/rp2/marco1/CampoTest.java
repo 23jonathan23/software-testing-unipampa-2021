@@ -2,13 +2,8 @@ package edu.unipampa.es.rp2.marco1;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.lang.Class;
 import java.lang.reflect.Field;
-
-import org.mockito.Mockito;
-import static org.mockito.Mockito.when;
 
 import java.util.List;
 
@@ -18,8 +13,7 @@ public class CampoTest{
 
   @BeforeEach
   public void setup(){
-    c = new Campo(2,2);
-    System.out.println("deu");
+
   }
 
   @Test
@@ -138,7 +132,6 @@ public class CampoTest{
   public void testIfLocalizacaoAdjacenteRandomicaReturnTheFirstIndexOfAdjacent(){
     var campo = new Campo(50, 50);
     var localizacao = new Localizacao(10, 10);
-    List<Localizacao> listLocalizacao = campo.localizacoesAdjacentes(localizacao);
 
     // Act
     var local = campo.localizacaoAdjacenteRandomica(localizacao);
