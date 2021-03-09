@@ -8,9 +8,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class CampoTest{
-
-  Campo c;
-
+  
   @BeforeEach
   public void setup(){
 
