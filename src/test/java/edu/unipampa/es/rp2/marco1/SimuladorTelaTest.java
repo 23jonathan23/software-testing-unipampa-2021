@@ -71,6 +71,7 @@ public class SimuladorTelaTest {
         //Arrange
         campo = new Campo(50, 50);
         estatisticas = new CampoEstatistica();
+        tela.setVisible(false);
 
         for (int i = 0; i < 10; i++) {
 
@@ -87,6 +88,7 @@ public class SimuladorTelaTest {
         String statusEsperado = "LoboGuara: 10 Ovelha: 10 ";
 
         //Act
+        tela.mostraStatus(0, campo);
         String statusObtido = estatisticas.getPopulationDetails(campo);
         
         if (statusObtido.startsWith("O")) {
