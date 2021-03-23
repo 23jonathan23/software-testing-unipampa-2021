@@ -17,6 +17,7 @@ public class RandomizadorTest {
 
   @Test
   public void testIfResetMethodSetsTheRANDSeedTo1111(){
+    Randomizador rand = new Randomizador();
     Random random1111 = new Random(1111);
     Random teste = Randomizador.getRandom();
     // Act
