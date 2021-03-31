@@ -10,8 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginUserTest {
-    private final String _email = "grupo6@unipampa.edu.br";
-    private final String _password = "87654321";
+    private static String _email;
+    private static String _password;
     private final String _uriLogin = "http://lesse.com.br/tools/pmst_rp2/";
     private final String _uriProjects = "http://lesse.com.br/tools/pmst_rp2/projects";
     private final int _timeOutInSeconds = 10;
@@ -21,6 +21,9 @@ public class LoginUserTest {
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", "resources/windows/chromedriver.exe");
         _driver = new ChromeDriver();
+        var config = Configuration.getConfiguration();
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
     }
 
     @AfterClass
