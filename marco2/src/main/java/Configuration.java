@@ -7,7 +7,7 @@ public class Configuration {
   
   public static Properties getConfiguration() {
     try {
-      BufferedReader br = new BufferedReader(new FileReader("config/credenttials.csv"));
+      BufferedReader br = new BufferedReader(new FileReader("config/credentials.csv"));
       var credentials = br.readLine().split(COMMA_DELIMITER);
   
       Properties props = new Properties();
