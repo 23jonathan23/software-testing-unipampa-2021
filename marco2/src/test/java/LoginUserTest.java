@@ -1,4 +1,8 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.concurrent.TimeUnit;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,6 +18,7 @@ public class LoginUserTest {
     private static String _password;
     private final String _uriLogin = "http://lesse.com.br/tools/pmst_rp2/";
     private final String _uriProjects = "http://lesse.com.br/tools/pmst_rp2/projects";
+    private final String _expectedMessage = "the email or password is incorrect!";
     private final int _timeOutInSeconds = 10;
     private static WebDriver _driver;
 
@@ -45,6 +50,52 @@ public class LoginUserTest {
 
         //Assert
         assertEquals(expectedUrl, actualUrl);
+    }
+
+    @Test
+    public void When_navigating_to_silver_bullet_website_and_inputting_a_wrong_email_then_a_warning_message_must_be_shown(){
+        _driver.navigate().to(_uriLogin);
+
+        signin(_driver, _email, _password);
+
+        String mensagem = getText(_driver);
+        System.out.println(mensagem);
+
+        assertEquals(_expectedMessage, mensagem);
+    }
+
+    @Test
+    public void When_navigating_to_silver_bullet_website_and_inputting_a_wrong_password_then_a_warning_message_must_be_shown(){
+        _driver.navigate().to(_uriLogin);
+
+        signin(_driver, _email, _password);
+
+        String mensagem = getText(_driver);
+        System.out.println(mensagem);
+
+        assertEquals(_expectedMessage, mensagem);
+    }
+
+    @Test
+    public void When_navigating_to_silver_bullet_website_and_inputting_wrong_credencials_then_it_must_not_store_the_data(){
+        _driver.navigate().to(_uriLogin);
+
+        signin(_driver, _email, _password);
+
+        WebElement we = _driver.findElement(By.id("email"));
+        String email = we.getAttribute("value");
+
+        we = _driver.findElement(By.id("password"));
+        String password = we.getAttribute("value");
+
+        assertTrue(email.isEmpty() && password.isEmpty());
+    }
+
+    private String getText(WebDriver driver){
+        WebElement inputEmailElementByXPath = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/div/form/div[4]/strong[4]/p")));
+        
+            return inputEmailElementByXPath.getText();
     }
 
     private void signin(WebDriver driver, String email, String password) { 
