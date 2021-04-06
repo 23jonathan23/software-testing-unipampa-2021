@@ -1,6 +1,8 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
@@ -26,7 +28,7 @@ public class LoginUserTest {
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", "resources/windows/chromedriver.exe");
         _driver = new ChromeDriver();
-        var config = Configuration.getConfiguration();
+        var config = Configuration.getConfiguration(new File("config/credentials.csv"));
         _email = config.getProperty("email");
         _password = config.getProperty("password");
     }
@@ -53,32 +55,50 @@ public class LoginUserTest {
     }
 
     @Test
-    public void When_navigating_to_silver_bullet_website_and_inputting_a_wrong_email_then_a_warning_message_must_be_shown(){
+    public void When_navigating_to_silver_bullet_website_and_inputting_wrong_email_then_the_page_must_be_different_of_the_ptojects_page(){
+        
+        var nonExpectedUrl = _uriProjects;
+        
         _driver.navigate().to(_uriLogin);
+        _driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        var config = Configuration.getConfiguration(new File("config/credentials2.csv"));
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
 
         signin(_driver, _email, _password);
 
-        String mensagem = getText(_driver);
-        System.out.println(mensagem);
+        var actualUrl = _driver.getCurrentUrl();
 
-        assertEquals(_expectedMessage, mensagem);
+        assertNotEquals(nonExpectedUrl, actualUrl);
     }
 
     @Test
-    public void When_navigating_to_silver_bullet_website_and_inputting_a_wrong_password_then_a_warning_message_must_be_shown(){
+    public void When_navigating_to_silver_bullet_website_and_inputting_wrong_password_then_the_page_must_be_different_of_the_ptojects_page(){
+        
+        var nonExpectedUrl = _uriProjects;
+        
         _driver.navigate().to(_uriLogin);
+        _driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        var config = Configuration.getConfiguration(new File("config/credentials3.csv"));
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
 
         signin(_driver, _email, _password);
 
-        String mensagem = getText(_driver);
-        System.out.println(mensagem);
+        var actualUrl = _driver.getCurrentUrl();
 
-        assertEquals(_expectedMessage, mensagem);
+        assertNotEquals(nonExpectedUrl, actualUrl);
     }
 
     @Test
     public void When_navigating_to_silver_bullet_website_and_inputting_wrong_credencials_then_it_must_not_store_the_data(){
         _driver.navigate().to(_uriLogin);
+
+        var config = Configuration.getConfiguration(new File("config/credentials4.csv"));
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
 
         signin(_driver, _email, _password);
 
@@ -89,6 +109,22 @@ public class LoginUserTest {
         String password = we.getAttribute("value");
 
         assertTrue(email.isEmpty() && password.isEmpty());
+    }
+
+    @Test
+    public void When_navigating_to_silver_bullet_website_and_inputting_a_wrong_credencials_then_a_warning_message_must_be_shown(){
+        _driver.navigate().to(_uriLogin);
+
+        var config = Configuration.getConfiguration(new File("config/credentials5.csv"));
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
+
+        signin(_driver, _email, _password);
+
+        String mensagem = getText(_driver);
+        System.out.println(mensagem);
+
+        assertEquals(_expectedMessage, mensagem);
     }
 
     private String getText(WebDriver driver){
