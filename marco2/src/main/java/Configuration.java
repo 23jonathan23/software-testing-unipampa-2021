@@ -1,13 +1,14 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.Properties;
 
 public class Configuration {
   private static final String COMMA_DELIMITER = ",";
   
-  public static Properties getConfiguration() {
+  public static Properties getConfiguration(File file) {
     try {
-      BufferedReader br = new BufferedReader(new FileReader("config/credentials.csv"));
+      BufferedReader br = new BufferedReader(new FileReader(file));
       var credentials = br.readLine().split(COMMA_DELIMITER);
   
       Properties props = new Properties();
