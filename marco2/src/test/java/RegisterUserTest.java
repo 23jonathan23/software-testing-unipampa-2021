@@ -1,4 +1,8 @@
 import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,7 +17,8 @@ public class RegisterUserTest {
     private String _name;
     private String _email;
     private String _password;    
-    private String _institution;    
+    private String _institution;
+    private static List<String> _propsList = new ArrayList<String>(); 
     private final String _uriLogin = "http://lesse.com.br/tools/pmst_rp2/";
     private final String _uriRegister = "http://lesse.com.br/tools/pmst_rp2/authentication/register/";
     private final int _timeOutInSeconds = 10;
@@ -23,6 +28,10 @@ public class RegisterUserTest {
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", "resources/windows/chromedriver.exe");
         _driver = new ChromeDriver();
+        _propsList.add("name");
+        _propsList.add("email");
+        _propsList.add("institution");
+        _propsList.add("password");
     }
 
     @AfterClass
@@ -33,7 +42,7 @@ public class RegisterUserTest {
     @Test
     public void When_you_navigate_to_the_silver_bullet_website_and_correctly_register_a_new_user_then_must_be_show_login_page_and_success_message() {
         //Arrange
-        var config = Configuration.getConfigurationRegisterUser("RP2G6-4");
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-4", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");
@@ -58,7 +67,7 @@ public class RegisterUserTest {
     @Test
     public void When_you_navigate_to_the_silver_bullet_website_and_register_a_new_user_with_an_empty_name_field_then_must_be_to_stay_on_the_current_page() {
         //Arrange
-        var config = Configuration.getConfigurationRegisterUser("RP2G6-5");
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-5", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");
@@ -80,7 +89,7 @@ public class RegisterUserTest {
     @Test
     public void When_register_a_new_user_with_empty_email_field_then_the_user_must_stay_on_the_current_page() {
         //Arrange
-        var config = Configuration.getConfigurationRegisterUser("RP2G6-6");
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-6", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");
@@ -102,7 +111,7 @@ public class RegisterUserTest {
     @Test
     public void When_register_a_new_user_with_empty_password_field_then_the_user_must_stay_on_the_current_page() {
         //Arrange
-        var config = Configuration.getConfigurationRegisterUser("RP2G6-7");
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-7", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");
@@ -124,7 +133,7 @@ public class RegisterUserTest {
     @Test
     public void When_register_a_new_user_with_many_characters_in_the_name_field_then_the_user_must_stay_on_the_current_page() {
         //Arrange
-        var config = Configuration.getConfigurationRegisterUser("RP2G6-8");
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-8", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");
@@ -146,7 +155,7 @@ public class RegisterUserTest {
     @Test
     public void When_register_a_new_user_with_many_characters_in_the_password_field_then_the_user_must_stay_on_the_current_page() {
         //Arrange
-        var config = Configuration.getConfigurationRegisterUser("RP2G6-9");
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-9", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");
@@ -168,7 +177,7 @@ public class RegisterUserTest {
     @Test
     public void When_register_a_new_user_with_an_invalid_email_then_the_user_must_stay_on_the_current_page() {
         //Arrange
-        var config = Configuration.getConfigurationRegisterUser("RP2G6-10");
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-10", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");

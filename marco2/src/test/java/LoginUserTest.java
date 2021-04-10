@@ -3,6 +3,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
@@ -18,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LoginUserTest {
     private static String _email;
     private static String _password;
+    private static List<String> _propsList = new ArrayList<String>();
     private final String _uriLogin = "http://lesse.com.br/tools/pmst_rp2/";
     private final String _uriProjects = "http://lesse.com.br/tools/pmst_rp2/projects";
     private final String _expectedMessage = "the email or password is incorrect!";
@@ -28,9 +31,8 @@ public class LoginUserTest {
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", "resources/windows/chromedriver.exe");
         _driver = new ChromeDriver();
-        var config = Configuration.getConfiguration(new File("config/credentials.csv"));
-        _email = config.getProperty("email");
-        _password = config.getProperty("password");
+        _propsList.add("email");
+        _propsList.add("password");
     }
 
     @AfterClass
@@ -42,6 +44,10 @@ public class LoginUserTest {
     public void When_to_navigate_to_silver_bullet_website_and_to_input_correctly_email_and_password_then_must_be_show_projects_page() {
         //Arrange
         var expectedUrl = _uriProjects;
+        
+        var config = Configuration.getConfiguration("LoginUser/credentials", _propsList);
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
         
         _driver.navigate().to(_uriLogin);
         
@@ -62,7 +68,7 @@ public class LoginUserTest {
         _driver.navigate().to(_uriLogin);
         _driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        var config = Configuration.getConfiguration(new File("config/credentials2.csv"));
+        var config = Configuration.getConfiguration("LoginUser/credentials2", _propsList);
         _email = config.getProperty("email");
         _password = config.getProperty("password");
 
@@ -81,7 +87,7 @@ public class LoginUserTest {
         _driver.navigate().to(_uriLogin);
         _driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        var config = Configuration.getConfiguration(new File("config/credentials3.csv"));
+        var config = Configuration.getConfiguration("LoginUser/credentials3", _propsList);
         _email = config.getProperty("email");
         _password = config.getProperty("password");
 
@@ -96,7 +102,7 @@ public class LoginUserTest {
     public void When_navigating_to_silver_bullet_website_and_inputting_wrong_credencials_then_it_must_not_store_the_data(){
         _driver.navigate().to(_uriLogin);
 
-        var config = Configuration.getConfiguration(new File("config/credentials4.csv"));
+        var config = Configuration.getConfiguration("LoginUser/credentials4", _propsList);
         _email = config.getProperty("email");
         _password = config.getProperty("password");
 
@@ -115,7 +121,7 @@ public class LoginUserTest {
     public void When_navigating_to_silver_bullet_website_and_inputting_a_wrong_credencials_then_a_warning_message_must_be_shown(){
         _driver.navigate().to(_uriLogin);
 
-        var config = Configuration.getConfiguration(new File("config/credentials5.csv"));
+        var config = Configuration.getConfiguration("LoginUser/credentials5", _propsList);
         _email = config.getProperty("email");
         _password = config.getProperty("password");
 
