@@ -33,7 +33,7 @@ public class RegisterProjectTest {
         _propsList.add("description");
         _propsList.add("objectives");
 
-        var config = Configuration.getConfiguration("LoginUser/credentials", Arrays.asList("email", "password"));
+        var config = Configuration.getConfiguration("RegisterProject/inputLogin", Arrays.asList("email", "password"));
         _email = config.getProperty("email");
         _password = config.getProperty("password");
     }
