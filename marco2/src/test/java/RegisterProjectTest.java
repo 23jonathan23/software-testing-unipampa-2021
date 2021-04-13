@@ -214,6 +214,153 @@ public class RegisterProjectTest {
         assertEquals(expectedUrl, actualUrl);
     }
 
+    @Test
+    public void When_to_try_create_a_new_project_with_only_special_characters_on_objectives_field_then_should_not_create_a_project() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterProject/inputsTest9", _propsList);
+        _title = config.getProperty("title");
+        _description = config.getProperty("description");
+        _objectives = config.getProperty("objectives");
+        
+        var expectedUrl = "http://lesse.com.br/tools/pmst_rp2/new/";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        
+        //Act
+        registerProject(_driver, _title, _description, _objectives);
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }
+    
+    @Test
+    public void When_to_try_create_a_new_project_with_html_element_on_title_field_then_should_not_create_a_project() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterProject/inputsTest10", _propsList);
+        _title = config.getProperty("title");
+        _description = config.getProperty("description");
+        _objectives = config.getProperty("objectives");
+        
+        var expectedUrl = "http://lesse.com.br/tools/pmst_rp2/new/";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        
+        //Act
+        registerProject(_driver, _title, _description, _objectives);
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }
+
+    @Test
+    public void When_to_try_create_a_new_project_with_html_element_on_description_field_then_should_not_create_a_project() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterProject/inputsTest11", _propsList);
+        _title = config.getProperty("title");
+        _description = config.getProperty("description");
+        _objectives = config.getProperty("objectives");
+        
+        var expectedUrl = "http://lesse.com.br/tools/pmst_rp2/new/";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        
+        //Act
+        registerProject(_driver, _title, _description, _objectives);
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }
+
+    @Test
+    public void When_to_try_create_a_new_project_with_html_element_on_objectives_field_then_should_not_create_a_project() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterProject/inputsTest12", _propsList);
+        _title = config.getProperty("title");
+        _description = config.getProperty("description");
+        _objectives = config.getProperty("objectives");
+        
+        var expectedUrl = "http://lesse.com.br/tools/pmst_rp2/new/";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        
+        //Act
+        registerProject(_driver, _title, _description, _objectives);
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }
+
+    @Test
+    public void When_to_try_create_a_new_project_with_emojis_on_title_field_then_should_not_create_a_project() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterProject/inputsTest13", _propsList);
+        _title = config.getProperty("title");
+        _description = config.getProperty("description");
+        _objectives = config.getProperty("objectives");
+        
+        var expectedUrl = "http://lesse.com.br/tools/pmst_rp2/new/";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        
+        //Act
+        registerProject(_driver, _title, _description, _objectives);
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }
+
+    @Test
+    public void When_to_try_create_a_new_project_with_emojis_on_description_field_then_should_not_create_a_project() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterProject/inputsTest14", _propsList);
+        _title = config.getProperty("title");
+        _description = config.getProperty("description");
+        _objectives = config.getProperty("objectives");
+        
+        var expectedUrl = "http://lesse.com.br/tools/pmst_rp2/new/";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        
+        //Act
+        registerProject(_driver, _title, _description, _objectives);
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }
+
+    @Test
+    public void When_to_try_create_a_new_project_with_emojis_on_objectives_field_then_should_not_create_a_project() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterProject/inputsTest15", _propsList);
+        _title = config.getProperty("title");
+        _description = config.getProperty("description");
+        _objectives = config.getProperty("objectives");
+        
+        var expectedUrl = "http://lesse.com.br/tools/pmst_rp2/new/";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        
+        //Act
+        registerProject(_driver, _title, _description, _objectives);
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }
+
     private String getMessageSuccess(WebDriver driver) {
         WebElement messageElementByClass = (new WebDriverWait(driver, _timeOutInSeconds))
             .until(ExpectedConditions.presenceOfElementLocated(By.className("alert-success")));
