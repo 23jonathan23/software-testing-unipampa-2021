@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddMemberTest {
@@ -42,7 +43,7 @@ public class AddMemberTest {
     }
 
     @Test
-    public void test1(){
+    public void when_add_member_with_spaces_in_the_email_field_then_a_warning_message_must_be_shown(){
         //Arrange
         var config = Configuration.getConfiguration("AddMember/RP2G6-29", _propsList);
         
@@ -51,11 +52,8 @@ public class AddMemberTest {
         _emailNewMember = config.getProperty("emailNewMember");
         
         _driver.navigate().to(_uriLogin);
-        signin(_driver, _email, _password);
         
-        WebElement submitLoginElementById = (new WebDriverWait(_driver, _timeOutInSeconds))
-            .until(ExpectedConditions.presenceOfElementLocated(By.xpath(_pathAddMember)));
-        submitLoginElementById.click();
+        signin(_driver, _email, _password);
       
         //Act
         addMember(_driver, _emailNewMember);
@@ -63,9 +61,181 @@ public class AddMemberTest {
         
         //Assert
         assertNotEquals(notExpected, msgReturn(_driver));
+        
+        logout();
+    }
+    @Test
+    public void when_add_member_with_empty_the_email_field_then_a_warning_message_must_be_shown(){
+        //Arrange
+        var config = Configuration.getConfiguration("AddMember/RP2G6-30", _propsList);
+        
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
+        _emailNewMember = "";
+
+        _driver.navigate().to(_uriLogin);
+        
+      
+        //Act
+        addMember(_driver, _emailNewMember);
+        
+        //Assert
+        assertNotEquals(_uriLogin, _driver.getCurrentUrl());
+        
+        logout();
     }
     
-    private void signin(WebDriver driver, String email, String password) { 
+    @Test
+    public void when_add_member_with_email_not_cadastred_the_email_field_then_a_warning_message_must_be_shown(){
+        //Arrange
+        var config = Configuration.getConfiguration("AddMember/RP2G6-31", _propsList);
+        
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
+        _emailNewMember = config.getProperty("emailNewMember");
+        
+        _driver.navigate().to(_uriLogin);
+            
+        signin(_driver, _email, _password);
+        
+      
+        //Act
+        addMember(_driver, _emailNewMember);
+        String Expected = "This e-mail doesn`t exist in our database!";
+        
+        //Assert
+        assertEquals(Expected, msgReturn(_driver));
+        
+        logout();
+    }
+    
+    @Test
+    public void when_add_member_with_correct_email_the_email_field_then_a_success_message_must_be_shown(){
+        //Arrange
+        var config = Configuration.getConfiguration("AddMember/RP2G6-32", _propsList);
+        
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
+        _emailNewMember = config.getProperty("emailNewMember");
+        
+        _driver.navigate().to(_uriLogin);
+            
+        signin(_driver, _email, _password);
+        
+      
+        //Act
+        addMember(_driver, _emailNewMember);
+        String Expected = "User update!";
+        
+        //Assert
+        assertEquals(Expected, msgReturn(_driver));
+        
+        logout();
+    }
+    
+    @Test
+    public void when_add_member_with_current_user__the_email_field_then_a_warning_message_must_be_shown(){
+        //Arrange
+        var config = Configuration.getConfiguration("AddMember/RP2G6-33", _propsList);
+        
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
+        _emailNewMember = config.getProperty("emailNewMember");
+        
+        _driver.navigate().to(_uriLogin);
+            
+        signin(_driver, _email, _password);
+        
+      
+        //Act
+        addMember(_driver, _emailNewMember);
+        String notExpected = "User update!";
+        
+        //Assert
+        assertNotEquals(notExpected, msgReturn(_driver));
+        
+        logout();
+    }
+    
+    @Test
+    public void when_add_member_with_already_existing_the_email_field_then_a_warning_message_must_be_shown(){
+        //Arrange
+        var config = Configuration.getConfiguration("AddMember/RP2G6-34", _propsList);
+        
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
+        _emailNewMember = config.getProperty("emailNewMember");
+        
+        _driver.navigate().to(_uriLogin);
+            
+        signin(_driver, _email, _password);
+        
+      
+        //Act
+        addMember(_driver, _emailNewMember);
+        String Expected = "User update!";
+        
+        //Assert
+        assertEquals(Expected, msgReturn(_driver));
+        
+        logout();
+    }
+    
+    @Test
+    public void when_add_a_member_with_a_staff_user_then_a_warning_message_must_be_shown(){
+     //Arrange
+        var config = Configuration.getConfiguration("AddMember/RP2G6-35", _propsList);
+        
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
+        _emailNewMember = config.getProperty("emailNewMember");
+        
+        _driver.navigate().to(_uriLogin);
+            
+        signin(_driver, _email, _password);
+             
+        //Act
+        String uriAddMember = _driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div/div/div[2]/table/tbody/tr/td[3]/a[3]")).getAttribute("href"); 
+          
+        _driver.navigate().to(uriAddMember);
+        
+        addMemberNotClick(_driver, _emailNewMember);
+        String NotExpected =  "User update!";
+        
+        //Assert
+        assertNotEquals(NotExpected, msgReturn(_driver));
+        
+        logout();
+    }
+    
+    @Test
+    public void when_add_a_member_with_a_professor_user_then_a_warning_message_must_be_shown(){
+     //Arrange
+        var config = Configuration.getConfiguration("AddMember/RP2G6-36", _propsList);
+        
+        _email = config.getProperty("email");
+        _password = config.getProperty("password");
+        _emailNewMember = config.getProperty("emailNewMember");
+        
+        _driver.navigate().to(_uriLogin);
+            
+        signin(_driver, _email, _password);
+             
+        //Act
+        String uriAddMember = _driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div/div/div[2]/table/tbody/tr/td[3]/a[3]")).getAttribute("href"); 
+          
+        _driver.navigate().to(uriAddMember);
+        
+        addMemberNotClick(_driver, _emailNewMember);
+        String NotExpected =  "User update!";
+        
+        //Assert
+        assertNotEquals(NotExpected, msgReturn(_driver));
+        
+        logout();
+    }
+    
+    private void signin(WebDriver driver, String email, String password) {
         WebElement inputEmailElementById = (new WebDriverWait(driver, _timeOutInSeconds))
             .until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
         inputEmailElementById.sendKeys(email);
@@ -80,6 +250,9 @@ public class AddMemberTest {
     }
     
     public void addMember(WebDriver driver, String emailNewMember){
+        WebElement clickAddMember = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath(_pathAddMember)));
+        clickAddMember.click();
         WebElement inputEmailElementById = (new WebDriverWait(driver, _timeOutInSeconds))
             .until(ExpectedConditions.presenceOfElementLocated(By.xpath(_pathInputEmail)));
         inputEmailElementById.sendKeys(emailNewMember);        
@@ -89,8 +262,23 @@ public class AddMemberTest {
         submitLoginElementById.click();
     }
     
+    public void addMemberNotClick(WebDriver driver, String emailNewMember){
+
+        WebElement inputEmailElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath(_pathInputEmail)));
+        inputEmailElementById.sendKeys(emailNewMember);        
+        
+        WebElement selectElement = _driver.findElement(By.id("access_level"));
+        Select selectObject = new Select(selectElement);
+        selectObject.selectByIndex(2);
+        
+        WebElement submitLoginElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("add_researcher_submit")));
+        submitLoginElementById.click();
+    }
+    
     private String getMessageError(WebDriver driver) {
-        String errorMessage = driver.findElement(By.id("title")).getAttribute("validationMessage");
+        String errorMessage = driver.findElement(By.id("email")).getAttribute("validationMessage");
 
         return errorMessage;
     }
@@ -105,5 +293,10 @@ public class AddMemberTest {
         }
 
         return mensagem;
+    }
+    private void logout(){
+       _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/authentication/logout");
+       _driver.navigate().refresh();
+
     }
 }
