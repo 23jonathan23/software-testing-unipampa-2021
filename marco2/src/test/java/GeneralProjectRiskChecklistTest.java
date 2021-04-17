@@ -74,6 +74,58 @@ public class GeneralProjectRiskChecklistTest {
         assertEquals(expectedMessage, actualMessage);
     }
 
+    @Test
+    public void When_to_create_a_new_topic_and_the_percentage_of_the_score_has_already_been_calculated_then_should_the_total_score_to_show_sum_percentage_correctly() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest2", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+
+        var expectedScore = getScoreTopic(_driver);
+        
+        //Act
+        var totalScore = getTotalScore(_driver);
+
+        //Assert
+        assertEquals(expectedScore, totalScore);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_and_the_percentage_of_the_score_has_already_been_calculated_and_save_checklist_then_should_the_total_score_to_show_sum_percentage_correctly() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest3", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+
+        var expectedScore = getScoreTopic(_driver);
+        
+        saveChecklist(_driver);
+        
+        //Act
+        var totalScore = getTotalScore(_driver);
+
+        //Assert
+        assertEquals(expectedScore, totalScore);
+    }
+
     private void createTopic(WebDriver driver,String aspects, String weight, String level, String comments) {
         deleteTopics(driver);
 
@@ -159,6 +211,24 @@ public class GeneralProjectRiskChecklistTest {
         
         var contentMenssage = (messageElementByClass.findElement(By.tagName("strong"))).getText();
         return contentMenssage;
+    }
+
+    private String getScoreTopic(WebDriver driver) {
+        WebElement scoreElementByName = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.name("score[]")));
+
+        return scoreElementByName.getAttribute("value");
+    }
+
+    private String getTotalScore(WebDriver driver) {
+        WebElement scoreTotalElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.id("gprc_1")));
+        
+        var scoreTotalValue = scoreTotalElementById.getText()
+            .replaceAll("Total Score: ", "")
+            .replaceAll("%", "");
+        
+        return scoreTotalValue;
     }
 
     private void signin(WebDriver driver, String email, String password) { 
