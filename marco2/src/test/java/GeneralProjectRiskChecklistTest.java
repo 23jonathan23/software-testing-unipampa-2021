@@ -1,8 +1,11 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -12,7 +15,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -126,6 +128,159 @@ public class GeneralProjectRiskChecklistTest {
         assertEquals(expectedScore, totalScore);
     }
 
+    @Test
+    public void When_to_create_a_new_topic_and_with_aspects_field_only_1000_characters_then_should_limit_the_number_of_characters() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest4", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        var expectedChars = _aspects.length();
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var totalChars = (getFieldsValues(_driver)).get("aspects").length();
+
+        //Assert
+        assertNotEquals(expectedChars, totalChars);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_and_with_weight_field_only_1000_characters_then_should_not_accept_this_input() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest5", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        var expectedValue = "";
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var atualValue = getFieldsValues(_driver).get("weight");
+
+        //Assert
+        assertEquals(expectedValue, atualValue);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_and_with_level_field_only_1000_characters_then_should_not_accept_this_input() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest6", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        var expectedValue = "";
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var atualValue = getFieldsValues(_driver).get("level");
+
+        //Assert
+        assertEquals(expectedValue, atualValue);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_and_with_comments_field_only_1000_characters_then_should_limit_the_number_of_characters() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest7", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        var expectedChars = _comments.length();
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var totalChars = (getFieldsValues(_driver)).get("comments").length();
+
+        //Assert
+        assertNotEquals(expectedChars, totalChars);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_and_with_aspects_field_only_special_characters_then_should_not_to_save_the_checklist() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest8", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+
+        var expectedValue = _aspects;
+
+        var expectedMessage = "General Project Risk Checklist has been successfully changed!";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var actualValue = getFieldsValues(_driver).get("aspects");
+        
+        saveChecklist(_driver);
+        
+        var actualMessage = getMessageSuccess(_driver);
+
+        //Assert
+        assertNotEquals(expectedValue, actualValue);
+        assertNotEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void When_to_delete_all_topics_of_checklist_and_to_save_then_should_have_to_create_standard_topics() {
+        //Arrange
+        var expectedAspectsValueOfFistTopic = "Os objetivos do projeto foram validados com o cliente?";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject1);
+        
+        //Act
+        deleteTopics(_driver);
+        
+        saveChecklist(_driver);
+        
+        var actualAspectsValue = getFieldsValues(_driver).get("aspects");
+
+        //Assert
+        assertEquals(expectedAspectsValueOfFistTopic, actualAspectsValue);
+    }
+
     private void createTopic(WebDriver driver,String aspects, String weight, String level, String comments) {
         deleteTopics(driver);
 
@@ -191,11 +346,13 @@ public class GeneralProjectRiskChecklistTest {
     }
 
     private void acceptAlert(WebDriver driver) {
-        Alert alert = (new WebDriverWait(driver, _timeOutInSeconds))
-            .until(ExpectedConditions.alertIsPresent());
-        if(alert != null) {
-            alert.accept();
-        }
+        try {
+            Alert alert = (new WebDriverWait(driver, _timeOutInSeconds))
+                .until(ExpectedConditions.alertIsPresent());
+            if(alert != null) {
+                alert.accept();
+            }
+        }catch(Exception er) { return; }
     }
 
     private void navigateToChecklist(WebDriver driver, String uri) {
@@ -218,6 +375,38 @@ public class GeneralProjectRiskChecklistTest {
             .until(ExpectedConditions.presenceOfElementLocated(By.name("score[]")));
 
         return scoreElementByName.getAttribute("value");
+    }
+
+    private Map<String, String> getFieldsValues(WebDriver driver) {
+        Map<String, String> dictonary = new HashMap<String, String>();
+        
+        WebElement aspectsElementByName;
+        try {
+            aspectsElementByName = (new WebDriverWait(driver, _timeOutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(By.name("aspects[]")));
+        } catch (Exception er) {
+            aspectsElementByName = (new WebDriverWait(driver, _timeOutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("aspects[1]")));
+        }
+
+        dictonary.put("aspects", aspectsElementByName.getAttribute("value"));
+
+        WebElement weightElementByName = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.name("weight[]")));
+           
+        dictonary.put("weight", weightElementByName.getAttribute("value"));
+
+        WebElement levelElementByName = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.name("level[]")));
+
+        dictonary.put("level", levelElementByName.getAttribute("value"));
+
+        WebElement commentsElementByName = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.name("comments[]")));
+
+        dictonary.put("comments", commentsElementByName.getAttribute("value"));
+
+        return dictonary;
     }
 
     private String getTotalScore(WebDriver driver) {
