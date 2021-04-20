@@ -44,6 +44,7 @@ public class MaintainWorkPerformanceReportTest {
         _propsList1.add("changes");
         _propsList1.add("risks");
         _propsList1.add("attentionPoints");
+        _propsList1.add("fileUploadPath");
         _propsList1.add("fileDescription");
     }
 
