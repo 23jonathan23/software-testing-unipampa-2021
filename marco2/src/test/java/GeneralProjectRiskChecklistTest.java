@@ -281,6 +281,230 @@ public class GeneralProjectRiskChecklistTest {
         assertEquals(expectedAspectsValueOfFistTopic, actualAspectsValue);
     }
 
+    @Test
+    public void When_to_create_a_new_topic_with_comments_field_using_special_characters_only_then_should_not_to_save_the_checklist() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest9", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+
+        var expectedValue = _aspects;
+
+        var expectedMessage = "General Project Risk Checklist has been successfully changed!";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var actualValue = getFieldsValues(_driver).get("aspects");
+        
+        saveChecklist(_driver);
+        
+        var actualMessage = getMessageSuccess(_driver);
+
+        //Assert
+        assertNotEquals(expectedValue, actualValue);
+        assertNotEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_with_weight_field_using_special_characters_only_then_should_not_to_save_the_checklist() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest10", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+
+        var expectedValue = _aspects;
+
+        var expectedMessage = "General Project Risk Checklist has been successfully changed!";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var actualValue = getFieldsValues(_driver).get("aspects");
+        
+        saveChecklist(_driver);
+        
+        var actualMessage = getMessageSuccess(_driver);
+
+        //Assert
+        assertNotEquals(expectedValue, actualValue);
+        assertNotEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_with_level_field_using_special_characters_only_then_should_not_to_save_the_checklist() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest11", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+
+        var expectedValue = _aspects;
+
+        var expectedMessage = "General Project Risk Checklist has been successfully changed!";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var actualValue = getFieldsValues(_driver).get("aspects");
+        
+        saveChecklist(_driver);
+        
+        var actualMessage = getMessageSuccess(_driver);
+
+        //Assert
+        assertNotEquals(expectedValue, actualValue);
+        assertNotEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_with_aspects_field_using_html_then_should_not_to_save_the_checklist() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest12", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+
+        var expectedValue = _aspects;
+
+        var expectedMessage = "General Project Risk Checklist has been successfully changed!";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var actualValue = getFieldsValues(_driver).get("aspects");
+        
+        saveChecklist(_driver);
+        
+        var actualMessage = getMessageSuccess(_driver);
+
+        //Assert
+        assertNotEquals(expectedValue, actualValue);
+        assertNotEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_with_weight_field_using_html_then_should_not_to_save_the_checklist() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest13", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+
+        var expectedValue = _aspects;
+
+        var expectedMessage = "General Project Risk Checklist has been successfully changed!";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var actualValue = getFieldsValues(_driver).get("aspects");
+        
+        saveChecklist(_driver);
+        
+        var actualMessage = getMessageSuccess(_driver);
+
+        //Assert
+        assertNotEquals(expectedValue, actualValue);
+        assertNotEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_with_level_field_using_html_then_should_not_to_save_the_checklist() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest14", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+
+        var expectedValue = _aspects;
+
+        var expectedMessage = "General Project Risk Checklist has been successfully changed!";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var actualValue = getFieldsValues(_driver).get("aspects");
+        
+        saveChecklist(_driver);
+        
+        var actualMessage = getMessageSuccess(_driver);
+
+        //Assert
+        assertNotEquals(expectedValue, actualValue);
+        assertNotEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void When_to_create_a_new_topic_with_comments_field_using_html_then_should_not_to_save_the_checklist() {
+        //Arrange
+        var config = Configuration.getConfiguration("GeneralProjectRiskChecklistTest/inputsTest15", _propsList);
+        _aspects = config.getProperty("aspects");
+        _weight = config.getProperty("weight");
+        _level = config.getProperty("level");
+        _comments = config.getProperty("comments");
+
+        var expectedValue = _aspects;
+
+        var expectedMessage = "General Project Risk Checklist has been successfully changed!";
+        
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToChecklist(_driver, _uriProject2);
+        
+        //Act
+        createTopic(_driver, _aspects, _weight, _level, _comments);
+        
+        var actualValue = getFieldsValues(_driver).get("aspects");
+        
+        saveChecklist(_driver);
+        
+        var actualMessage = getMessageSuccess(_driver);
+
+        //Assert
+        assertNotEquals(expectedValue, actualValue);
+        assertNotEquals(expectedMessage, actualMessage);
+    }
+
     private void createTopic(WebDriver driver,String aspects, String weight, String level, String comments) {
         deleteTopics(driver);
 
