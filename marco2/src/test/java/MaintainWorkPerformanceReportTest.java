@@ -54,24 +54,382 @@ public class MaintainWorkPerformanceReportTest {
     }
 
     @Test
-    public void test1() {
-        _driver.navigate().to(_uriLogin);
-        signin(_driver, "usuarioGrupo6@gmail.com", "123456");
-        registerProject(_driver, "titulo1", "descricao1", "objetivo1");
-    }
+    public void When_to_create_a_new_Work_Performance_Report_with_blank_field_then_it_must_keep_at_the_same_URL() {
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-72", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        _projectDescription = props.getProperty("projectDescription");
+        _projectObjective = props.getProperty("projectObjective");
 
-    @Test
-    public void test2() {
         _driver.navigate().to(_uriLogin);
-        signin(_driver, "usuarioGrupo6@gmail.com", "123456");
+        signin(_driver, _email, _password);
+        registerProject(_driver, _projectName, _projectDescription, _projectObjective);
+
+        String responsible = "";
+        String date = "";
+        String activitiesInExecution = "";
+        String activitiesToPerform = "";
+        String generalComments = "";
+        String issues = "";
+        String changes = "";
+        String risks = "";
+        String attentionPoints = "";
+
+        createReport(_driver, responsible, date, activitiesInExecution, activitiesToPerform, 
+            generalComments, issues, changes, risks, attentionPoints);
+
+            WebElement findExpected1 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+          findExpected1.click();
+  
+          Thread time = new Thread();
+          try {
+              time.sleep(1000);
+          } catch (Exception e) {}
+          
+          WebElement findExpected2 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+          findExpected2.click();
+  
+          String notExpectedURL = _driver.getCurrentUrl();
+
+        try {
+            time.sleep(2000);
+        } catch (Exception e) {}
+
+        String actualURL = _driver.getCurrentUrl();
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/projects");
         deleteProject(_driver);
+
+        assertNotEquals(notExpectedURL, actualURL);
     }
 
     @Test
-    public void test3() {
+    public void When_to_create_a_new_Work_Performance_Report_with_only_the_name_of_the_responsible_then_it_must_keep_at_the_same_URL() { //TODO
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-73", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        _projectDescription = props.getProperty("projectDescription");
+        _projectObjective = props.getProperty("projectObjective");
+
         _driver.navigate().to(_uriLogin);
-        signin(_driver, "usuarioGrupo6@gmail.com", "123456");
-        createReport(_driver, "tana", "17/04/2021", "tama", "tama", "tama", "tama", "tama", "tama", "tama");
+        signin(_driver, _email, _password);
+        registerProject(_driver, _projectName, _projectDescription, _projectObjective);
+
+        String responsible = props.getProperty("responsible");
+        String date = "";
+        String activitiesInExecution = "";
+        String activitiesToPerform = "";
+        String generalComments = "";
+        String issues = "";
+        String changes = "";
+        String risks = "";
+        String attentionPoints = "";
+
+        createReport(_driver, responsible, date, activitiesInExecution, activitiesToPerform, 
+            generalComments, issues, changes, risks, attentionPoints);
+
+            WebElement findExpected1 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+          findExpected1.click();
+  
+          Thread time = new Thread();
+          try {
+              time.sleep(1000);
+          } catch (Exception e) {}
+          
+          WebElement findExpected2 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+          findExpected2.click();
+  
+          String notExpectedURL = _driver.getCurrentUrl();
+
+        try {
+            time.sleep(2000);
+        } catch (Exception e) {}
+
+        String actualURL = _driver.getCurrentUrl();
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/projects");
+        deleteProject(_driver);
+
+        assertNotEquals(notExpectedURL, actualURL);
+    }
+
+    @Test
+    public void When_to_create_a_new_Work_Performance_Report_with_the_correct_inputs_then_it_must_go_to_the_list_URL() { //TODO
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-74", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        _projectDescription = props.getProperty("projectDescription");
+        _projectObjective = props.getProperty("projectObjective");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        registerProject(_driver, _projectName, _projectDescription, _projectObjective);
+
+        
+        String responsible = props.getProperty("responsible");
+        String date = props.getProperty("date");
+        String activitiesInExecution = props.getProperty("activitiesInExecution");
+        String activitiesToPerform = props.getProperty("activitiesToPerform");
+        String generalComments = props.getProperty("generalComments");
+        String issues = props.getProperty("issues");
+        String changes = props.getProperty("changes");
+        String risks = props.getProperty("risks");
+        String attentionPoints = props.getProperty("attentionPoints");
+
+        createReport(_driver, responsible, date, activitiesInExecution, activitiesToPerform, 
+            generalComments, issues, changes, risks, attentionPoints);
+
+            WebElement findExpected1 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+          findExpected1.click();
+  
+          Thread time = new Thread();
+          try {
+              time.sleep(1000);
+          } catch (Exception e) {}
+          
+          WebElement findExpected2 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+          findExpected2.click();
+  
+          String expectedURL = _driver.getCurrentUrl();
+
+        try {
+            time.sleep(2000);
+        } catch (Exception e) {}
+
+        String actualURL = _driver.getCurrentUrl();
+        String notExpectedMessage = "A PHP Error was encountered";
+        String actualMessage = _driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div/div/div[2]/div/div/div[2]/div/table/tbody/tr/td[4]/div[1]/div/form/h4")).getText();
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/projects");
+        deleteProject(_driver);
+
+        assertNotEquals(notExpectedMessage, actualMessage);
+        assertEquals(expectedURL, actualURL);
+        
+    }
+
+    @Test
+    public void When_to_create_a_new_Work_Performance_Report_with_a_large_number_of_character_in_all_fields_then_it_must_keep_at_the_same_URL() { //TODO
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-75", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        _projectDescription = props.getProperty("projectDescription");
+        _projectObjective = props.getProperty("projectObjective");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        registerProject(_driver, _projectName, _projectDescription, _projectObjective);
+
+        String responsible = props.getProperty("responsible");
+        String date = props.getProperty("date");
+        String activitiesInExecution = props.getProperty("activitiesInExecution");
+        String activitiesToPerform = props.getProperty("activitiesToPerform");
+        String generalComments = props.getProperty("generalComments");
+        String issues = props.getProperty("issues");
+        String changes = props.getProperty("changes");
+        String risks = props.getProperty("risks");
+        String attentionPoints = props.getProperty("attentionPoints");
+
+        createReport(_driver, responsible, date, activitiesInExecution, activitiesToPerform, 
+            generalComments, issues, changes, risks, attentionPoints);
+
+            WebElement findExpected1 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+          findExpected1.click();
+  
+          Thread time = new Thread();
+          try {
+              time.sleep(1000);
+          } catch (Exception e) {}
+          
+          WebElement findExpected2 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+          findExpected2.click();
+  
+          String notExpectedURL = _driver.getCurrentUrl();
+
+        try {
+            time.sleep(2000);
+        } catch (Exception e) {}
+
+        String actualURL = _driver.getCurrentUrl();
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/projects");
+        deleteProject(_driver);
+
+        assertNotEquals(notExpectedURL, actualURL);
+    }
+
+    @Test
+    public void When_to_create_a_new_Work_Performance_Report_with_special_catacters_in_all_fields_then_it_must_keep_at_the_same_URL() { //TODO
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-76", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        _projectDescription = props.getProperty("projectDescription");
+        _projectObjective = props.getProperty("projectObjective");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        registerProject(_driver, _projectName, _projectDescription, _projectObjective);
+
+        String responsible = props.getProperty("responsible");
+        String date = props.getProperty("date");
+        String activitiesInExecution = props.getProperty("activitiesInExecution");
+        String activitiesToPerform = props.getProperty("activitiesToPerform");
+        String generalComments = props.getProperty("generalComments");
+        String issues = props.getProperty("issues");
+        String changes = props.getProperty("changes");
+        String risks = props.getProperty("risks");
+        String attentionPoints = props.getProperty("attentionPoints");
+
+        createReport(_driver, responsible, date, activitiesInExecution, activitiesToPerform, 
+            generalComments, issues, changes, risks, attentionPoints);
+
+            WebElement findExpected1 = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+        findExpected1.click();
+
+        Thread time = new Thread();
+        try {
+            time.sleep(1000);
+        } catch (Exception e) {}
+        
+        WebElement findExpected2 = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+        findExpected2.click();
+
+        String notExpectedURL = _driver.getCurrentUrl();
+
+        try {
+            time.sleep(2000);
+        } catch (Exception e) {}
+
+        String actualURL = _driver.getCurrentUrl();
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/projects");
+        deleteProject(_driver);
+
+        assertNotEquals(notExpectedURL, actualURL);
+    }
+
+    @Test
+    public void When_to_create_a_new_Work_Performance_Report_with_only_spaces_in_the_fields_then_it_must_keep_at_the_same_URL() { //TODO
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-77", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        _projectDescription = props.getProperty("projectDescription");
+        _projectObjective = props.getProperty("projectObjective");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        registerProject(_driver, _projectName, _projectDescription, _projectObjective);
+
+        String responsible = props.getProperty("responsible");
+        String date = props.getProperty("date");
+        String activitiesInExecution = props.getProperty("activitiesInExecution");
+        String activitiesToPerform = props.getProperty("activitiesToPerform");
+        String generalComments = props.getProperty("generalComments");
+        String issues = props.getProperty("issues");
+        String changes = props.getProperty("changes");
+        String risks = props.getProperty("risks");
+        String attentionPoints = props.getProperty("attentionPoints");
+
+        createReport(_driver, responsible, date, activitiesInExecution, activitiesToPerform, 
+            generalComments, issues, changes, risks, attentionPoints);
+
+            WebElement findExpected1 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+          findExpected1.click();
+  
+          Thread time = new Thread();
+          try {
+              time.sleep(1000);
+          } catch (Exception e) {}
+          
+          WebElement findExpected2 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+          findExpected2.click();
+  
+          String notExpectedURL = _driver.getCurrentUrl();
+
+        try {
+            time.sleep(2000);
+        } catch (Exception e) {}
+
+        String actualURL = _driver.getCurrentUrl();
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/projects");
+        deleteProject(_driver);
+
+        assertNotEquals(notExpectedURL, actualURL);
+    }
+
+    @Test
+    public void When_to_click_to_edit_a_report_it_must_change_URL() {
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-78", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        _projectDescription = props.getProperty("projectDescription");
+        _projectObjective = props.getProperty("projectObjective");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        registerProject(_driver, _projectName, _projectDescription, _projectObjective);
+
+        String responsible = props.getProperty("responsible");
+        String date = props.getProperty("date");
+        String activitiesInExecution = props.getProperty("activitiesInExecution");
+        String activitiesToPerform = props.getProperty("activitiesToPerform");
+        String generalComments = props.getProperty("generalComments");
+        String issues = props.getProperty("issues");
+        String changes = props.getProperty("changes");
+        String risks = props.getProperty("risks");
+        String attentionPoints = props.getProperty("attentionPoints");
+
+        createReport(_driver, responsible, date, activitiesInExecution, activitiesToPerform, 
+            generalComments, issues, changes, risks, attentionPoints);
+
+        WebElement findExpected1 = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+        findExpected1.click();
+
+        Thread time = new Thread();
+        try {
+            time.sleep(1000);
+        } catch (Exception e) {}
+        
+        WebElement findExpected2 = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+        findExpected2.click();
+
+        String notExpectedURL = _driver.getCurrentUrl();
+        
+        WebElement inputTitleElementById = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[2]/div/div/div[2]/div/table/tbody/tr/td[4]/div[1]/button")));
+        inputTitleElementById.click();
+
+        try {
+            time.sleep(4000);
+        } catch (Exception e) {}
+        String actualURL = _driver.getCurrentUrl();
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/projects");
+        deleteProject(_driver);
+
+        assertNotEquals(notExpectedURL, actualURL);
     }
 
     private void deleteProject(WebDriver driver) {
@@ -86,6 +444,11 @@ public class MaintainWorkPerformanceReportTest {
 
         Alert alerta = driver.switchTo().alert();
         alerta.accept();
+
+        WebElement deleteMessage = (new WebDriverWait(driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div[1]/strong")));
+        String message = deleteMessage.getText();
+        System.out.println(message);
     }
 
     private void registerProject(WebDriver driver, String title, String description, String objectives) { 
@@ -109,14 +472,23 @@ public class MaintainWorkPerformanceReportTest {
     }
 
     private void createReport(WebDriver driver, String nome, String date, String mainActivities, String nextActivities, String comments, String issues, String changes, String risks, String attentionPoints) {
+
         WebElement findExpected = (new WebDriverWait(driver, _timeOutInSeconds))
-          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[2]/table/tbody[2]/tr/td[3]/a[1]")));
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div[2]/div/div/div[2]/table/tbody[2]/tr/td[3]/a[1]/span")));
         findExpected.click();
-        
 
-        driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/integration/work-performance-reports/list/116");
+        WebElement findExpected1 = (new WebDriverWait(driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+        findExpected1.click();
 
+        Thread time = new Thread();
+        try {
+            time.sleep(1000);
+        } catch (Exception e) {}
         
+        WebElement findExpected2 = (new WebDriverWait(driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+        findExpected2.click();
 
         WebElement clickToAdd = (new WebDriverWait(driver, _timeOutInSeconds))
           .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[1]/div/button")));
@@ -133,8 +505,6 @@ public class MaintainWorkPerformanceReportTest {
         WebElement inputDateElement = (new WebDriverWait(driver, _timeOutInSeconds))
           .until(ExpectedConditions.presenceOfElementLocated(By.id("date")));
         inputDateElement.sendKeys(date);
-
-        
 
         WebElement inputMainActivitiesElement = (new WebDriverWait(driver, _timeOutInSeconds))
           .until(ExpectedConditions.presenceOfElementLocated(By.id("main_activities")));
@@ -163,6 +533,10 @@ public class MaintainWorkPerformanceReportTest {
         WebElement inputEttentionPointsElement = (new WebDriverWait(driver, _timeOutInSeconds))
           .until(ExpectedConditions.presenceOfElementLocated(By.id("attention_points")));
         inputEttentionPointsElement.sendKeys(attentionPoints);
+
+        WebElement createButton = (new WebDriverWait(driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.id("work_performance_report-submit")));
+        createButton.click();
     }
 
     private void signin(WebDriver driver, String email, String password) {
