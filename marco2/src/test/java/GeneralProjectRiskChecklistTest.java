@@ -290,7 +290,7 @@ public class GeneralProjectRiskChecklistTest {
         _level = config.getProperty("level");
         _comments = config.getProperty("comments");
 
-        var expectedValue = _aspects;
+        var expectedValue = _comments;
 
         var expectedMessage = "General Project Risk Checklist has been successfully changed!";
         
@@ -302,7 +302,7 @@ public class GeneralProjectRiskChecklistTest {
         //Act
         createTopic(_driver, _aspects, _weight, _level, _comments);
         
-        var actualValue = getFieldsValues(_driver).get("aspects");
+        var actualValue = getFieldsValues(_driver).get("comments");
         
         saveChecklist(_driver);
         
@@ -322,7 +322,7 @@ public class GeneralProjectRiskChecklistTest {
         _level = config.getProperty("level");
         _comments = config.getProperty("comments");
 
-        var expectedValue = _aspects;
+        var expectedValue = _weight;
 
         var expectedMessage = "General Project Risk Checklist has been successfully changed!";
         
@@ -334,7 +334,7 @@ public class GeneralProjectRiskChecklistTest {
         //Act
         createTopic(_driver, _aspects, _weight, _level, _comments);
         
-        var actualValue = getFieldsValues(_driver).get("aspects");
+        var actualValue = getFieldsValues(_driver).get("weight");
         
         saveChecklist(_driver);
         
@@ -354,7 +354,7 @@ public class GeneralProjectRiskChecklistTest {
         _level = config.getProperty("level");
         _comments = config.getProperty("comments");
 
-        var expectedValue = _aspects;
+        var expectedValue = _level;
 
         var expectedMessage = "General Project Risk Checklist has been successfully changed!";
         
@@ -366,7 +366,7 @@ public class GeneralProjectRiskChecklistTest {
         //Act
         createTopic(_driver, _aspects, _weight, _level, _comments);
         
-        var actualValue = getFieldsValues(_driver).get("aspects");
+        var actualValue = getFieldsValues(_driver).get("level");
         
         saveChecklist(_driver);
         
@@ -418,7 +418,7 @@ public class GeneralProjectRiskChecklistTest {
         _level = config.getProperty("level");
         _comments = config.getProperty("comments");
 
-        var expectedValue = _aspects;
+        var expectedValue = _weight;
 
         var expectedMessage = "General Project Risk Checklist has been successfully changed!";
         
@@ -430,7 +430,7 @@ public class GeneralProjectRiskChecklistTest {
         //Act
         createTopic(_driver, _aspects, _weight, _level, _comments);
         
-        var actualValue = getFieldsValues(_driver).get("aspects");
+        var actualValue = getFieldsValues(_driver).get("weight");
         
         saveChecklist(_driver);
         
@@ -450,7 +450,7 @@ public class GeneralProjectRiskChecklistTest {
         _level = config.getProperty("level");
         _comments = config.getProperty("comments");
 
-        var expectedValue = _aspects;
+        var expectedValue = _level;
 
         var expectedMessage = "General Project Risk Checklist has been successfully changed!";
         
@@ -462,7 +462,7 @@ public class GeneralProjectRiskChecklistTest {
         //Act
         createTopic(_driver, _aspects, _weight, _level, _comments);
         
-        var actualValue = getFieldsValues(_driver).get("aspects");
+        var actualValue = getFieldsValues(_driver).get("level");
         
         saveChecklist(_driver);
         
@@ -482,7 +482,7 @@ public class GeneralProjectRiskChecklistTest {
         _level = config.getProperty("level");
         _comments = config.getProperty("comments");
 
-        var expectedValue = _aspects;
+        var expectedValue = _comments;
 
         var expectedMessage = "General Project Risk Checklist has been successfully changed!";
         
@@ -494,7 +494,7 @@ public class GeneralProjectRiskChecklistTest {
         //Act
         createTopic(_driver, _aspects, _weight, _level, _comments);
         
-        var actualValue = getFieldsValues(_driver).get("aspects");
+        var actualValue = getFieldsValues(_driver).get("comments");
         
         saveChecklist(_driver);
         
