@@ -539,6 +539,33 @@ public class MaintainWorkPerformanceReportTest {
         createButton.click();
     }
 
+    private void uploadFile(WebDriver driver, String path) {
+        WebElement findExpected = (new WebDriverWait(driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div[2]/div/div/div[2]/table/tbody[2]/tr/td[3]/a[1]/span")));
+        findExpected.click();
+
+        WebElement findExpected1 = (new WebDriverWait(driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+        findExpected1.click();
+
+        Thread time = new Thread();
+        try {
+            time.sleep(1000);
+        } catch (Exception e) {}
+        
+        WebElement findExpected2 = (new WebDriverWait(driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+        findExpected2.click();
+
+        WebElement findExpected3 = (new WebDriverWait(driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[2]/div/div/input")));
+        findExpected3.sendKeys(path);
+
+        try {
+            time.sleep(10000);
+        } catch (Exception e) {}
+    }
+
     private void signin(WebDriver driver, String email, String password) {
       WebElement inputEmailElementById = (new WebDriverWait(driver, _timeOutInSeconds))
           .until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
