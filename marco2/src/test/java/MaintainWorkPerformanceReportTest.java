@@ -29,11 +29,13 @@ public class MaintainWorkPerformanceReportTest {
     @BeforeClass
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", "resources/windows/chromedriver.exe");
-        _driver = new ChromeDriver();
+         ChromeOptions options = new ChromeOptions();
+         options.addArguments("--start-maximized");
+        _driver = new ChromeDriver(options);
         _propsList1.add("email");
         _propsList1.add("password");
         _propsList1.add("projectName");
-        _propsList1.add("projectDescription");
+        _propsList1.add("fileName");
         _propsList1.add("projectObjective");
         _propsList1.add("responsible");
         _propsList1.add("date");
@@ -50,7 +52,7 @@ public class MaintainWorkPerformanceReportTest {
 
     @AfterClass
     public static void teardown() {
-      _driver.quit();
+//      _driver.quit();
     }
 
     @Test
@@ -431,7 +433,264 @@ public class MaintainWorkPerformanceReportTest {
 
         assertNotEquals(notExpectedURL, actualURL);
     }
+    
+    @Test
+    public void When_to_click_to_delete_a_report_it_must_change_URL() {
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-79", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
 
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/integration/work-performance-reports/list/75");
+        
+        WebElement btnDelete = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[4]/div[2]/button")));
+        btnDelete.click();
+
+        Thread time = new Thread();
+        try {
+            time.sleep(1000);
+        } catch (Exception e) {}
+       
+        String notExpectedURL = _driver.getCurrentUrl();
+        
+        try {
+            time.sleep(4000);
+        } catch (Exception e) {}
+        String actualURL = _driver.getCurrentUrl();
+
+        assertNotEquals(notExpectedURL, actualURL);
+    }
+    
+    @Test
+    public void When_to_upload_to_invalid_archive_a_report_it_must_change_URL() {
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-80", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        String _fileName = props.getProperty("fileName");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/integration/work-performance-reports/list/75");
+        
+        WebElement inputNameFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[1]/div/div/input")));
+        inputNameFile.sendKeys(_fileName);
+        
+        WebElement inputFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[2]/div/div/input")));
+        inputFile.sendKeys("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\grupo6\\marco2\\config\\WorkPerformanceReport\\invalidFile.txt");
+        
+        WebElement btnSubmitFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[3]/div/button")));
+        btnSubmitFile.click();
+
+        Thread time = new Thread();
+        try {
+            time.sleep(1000);
+        } catch (Exception e) {}
+       
+        String ExpectedMessage = "No images found. ";
+        
+        try {
+            time.sleep(4000);
+        } catch (Exception e) {}
+        
+         WebElement tagMessageUpload = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[4]/div/div")));
+        
+        String actualMessage = tagMessageUpload.getText();
+
+        assertEquals(ExpectedMessage, actualMessage);
+    }
+    
+    @Test
+    public void When_to_upload_to_empty_description_a_report_it_must_change_URL() {
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-81", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        String _fileName = props.getProperty("fileName");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/integration/work-performance-reports/list/75");
+        
+        
+        WebElement inputFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[2]/div/div/input")));
+        inputFile.sendKeys("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\grupo6\\marco2\\config\\WorkPerformanceReport\\validFile.png");
+        
+        WebElement btnSubmitFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[3]/div/button")));
+        btnSubmitFile.click();
+
+        Thread time = new Thread();
+        try {
+            time.sleep(1000);
+        } catch (Exception e) {}
+       
+        String ExpectedMessage = "";
+        
+        try {
+            time.sleep(4000);
+        } catch (Exception e) {}
+        
+         WebElement tagMessageUpload = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[4]/div/div")));
+        
+        String actualMessage = tagMessageUpload.getText();
+
+        assertEquals(ExpectedMessage, actualMessage);
+    }
+    
+    @Test
+    public void When_to_upload_to_big_description_a_report_it_must_change_URL() {
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-82", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        String _fileName = props.getProperty("fileName");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/integration/work-performance-reports/list/75");
+        
+        WebElement inputNameFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[1]/div/div/input")));
+        inputNameFile.sendKeys(_fileName);
+        
+        WebElement inputFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[2]/div/div/input")));
+        inputFile.sendKeys("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\grupo6\\marco2\\config\\WorkPerformanceReport\\validFile.png");
+        
+        WebElement btnSubmitFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[3]/div/button")));
+        btnSubmitFile.click();
+
+        Thread time = new Thread();
+        try {
+            time.sleep(1000);
+        } catch (Exception e) {}
+       
+        String ExpectedMessage = "";
+        
+        try {
+            time.sleep(4000);
+        } catch (Exception e) {}
+        
+         WebElement tagMessageUpload = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[4]/div/div")));
+        
+        String actualMessage = tagMessageUpload.getText();
+
+        assertEquals(ExpectedMessage, actualMessage);
+    }
+    
+    @Test
+    public void When_to_create_a_new_Work_Performance_Report_with_the_invalid_date_then_it_must_go_to_the_list_URL() { //TODO
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-83", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        _projectDescription = props.getProperty("projectDescription");
+        _projectObjective = props.getProperty("projectObjective");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        registerProject(_driver, _projectName, _projectDescription, _projectObjective);
+
+        
+        String responsible = props.getProperty("responsible");
+        String date = props.getProperty("date");
+        String activitiesInExecution = props.getProperty("activitiesInExecution");
+        String activitiesToPerform = props.getProperty("activitiesToPerform");
+        String generalComments = props.getProperty("generalComments");
+        String issues = props.getProperty("issues");
+        String changes = props.getProperty("changes");
+        String risks = props.getProperty("risks");
+        String attentionPoints = props.getProperty("attentionPoints");
+
+        createReport(_driver, responsible, date, activitiesInExecution, activitiesToPerform, 
+            generalComments, issues, changes, risks, attentionPoints);
+
+            WebElement findExpected1 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]")));
+          findExpected1.click();
+  
+          Thread time = new Thread();
+          try {
+              time.sleep(1000);
+          } catch (Exception e) {}
+          
+          WebElement findExpected2 = (new WebDriverWait(_driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/aside/section/ul/li[4]/ul/li[7]")));
+          findExpected2.click();
+  
+          String expectedURL = _driver.getCurrentUrl();
+
+        try {
+            time.sleep(2000);
+        } catch (Exception e) {}
+
+        String actualURL = _driver.getCurrentUrl();
+        String notExpectedMessage = "A PHP Error was encountered";
+        String actualMessage = _driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div/div/div[2]/div/div/div[2]/div/table/tbody/tr/td[4]/div[1]/div/form/h4")).getText();
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/projects");
+        deleteProject(_driver);
+
+        assertNotEquals(notExpectedMessage, actualMessage);
+        assertEquals(expectedURL, actualURL);
+        
+    }
+    
+    @Test
+    public void When_to_upload_to_correct_inputs_a_report_it_must_change_URL() {
+        var props = Configuration.getConfiguration("WorkPerformanceReport/RP2G6-84", _propsList1);
+        _email = props.getProperty("email");
+        _password = props.getProperty("password");
+        _projectName = props.getProperty("projectName");
+        String _fileName = props.getProperty("fileName");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        _driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/integration/work-performance-reports/list/75");
+        
+        WebElement inputNameFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[1]/div/div/input")));
+        inputNameFile.sendKeys(_fileName);
+        
+        WebElement inputFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[2]/div/div/input")));
+        inputFile.sendKeys("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\grupo6\\marco2\\config\\WorkPerformanceReport\\validFile.png");
+        
+        WebElement btnSubmitFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[3]/div/div/form/div[3]/div/button")));
+        btnSubmitFile.click();
+
+        Thread time = new Thread();
+        try {
+            time.sleep(1000);
+        } catch (Exception e) {}
+       
+        String ExpectedMessage = "";
+        
+        try {
+            time.sleep(4000);
+        } catch (Exception e) {}
+        
+         WebElement tagMessageUpload = (new WebDriverWait(_driver, _timeOutInSeconds))
+          .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[4]/div/div")));
+        
+        String actualMessage = tagMessageUpload.getText();
+
+        assertEquals(ExpectedMessage, actualMessage);
+    }  
+    
     private void deleteProject(WebDriver driver) {
         WebElement inputTitleElementById = (new WebDriverWait(driver, _timeOutInSeconds))
           .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[2]/table/tbody[2]/tr/td[3]/a[4]/span")));
