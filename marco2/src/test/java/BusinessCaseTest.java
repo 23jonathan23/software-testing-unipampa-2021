@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -293,7 +294,7 @@ public class BusinessCaseTest {
         String actualText = getFieldText(_driver, "business_deals");
 
         //Assert
-        assertTrue(actualText.compareTo(_businessDeals) < 0);
+        assertFalse(actualText.compareTo(_businessDeals) < 0);
     }
 
     @Test
@@ -316,7 +317,7 @@ public class BusinessCaseTest {
         String actualText = getFieldText(_driver, "situation_analysis");
 
         //Assert
-        assertTrue(actualText.compareTo(_businessDeals) < 0);
+        assertFalse(actualText.compareTo(_businessDeals) < 0);
     }
 
     @Test
@@ -339,7 +340,7 @@ public class BusinessCaseTest {
         String actualText = getFieldText(_driver, "recommendation");
 
         //Assert
-        assertTrue(actualText.compareTo(_businessDeals) < 0);
+        assertFalse(actualText.compareTo(_businessDeals) < 0);
     }
 
     @Test
@@ -362,7 +363,7 @@ public class BusinessCaseTest {
         String actualText = getFieldText(_driver, "evaluation");
 
         //Assert
-        assertTrue(actualText.compareTo(_businessDeals) < 0);
+        assertFalse(actualText.compareTo(_businessDeals) < 0);
     }
 
     @Test
