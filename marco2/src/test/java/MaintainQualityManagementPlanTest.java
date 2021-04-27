@@ -284,6 +284,7 @@ public class MaintainQualityManagementPlanTest {
         //Assert
         assertEquals(expected, actual);      
     }
+
     @Test
     public void When_inserting_javascript_must_not_execute_the_javascript(){
         //Arrange
@@ -299,6 +300,100 @@ public class MaintainQualityManagementPlanTest {
         assertFalse(isAlert);       
     }
 
+    @Test
+    public void When_entering_10_million_chars_in_the_quality_standards_field_and_save_the_action_must_fail(){
+        // Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-131-a-137", _propsList);
+        _qualityStandards = config.getProperty("qualityStandards");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+
+        // Act
+        fillInput(_driver, "standards", _qualityStandards);
+        var expected = _qualityStandards;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "standards");
+
+        // Assert       
+        assertNotEquals(expected, actual);
+    }
+
+    @Test
+    public void When_entering_10_million_chars_in_the_quality_objectives_field_and_save_the_action_must_fail(){
+        // Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-131-a-137", _propsList);
+        _qualityObjectives = config.getProperty("qualityStandards");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+
+        // Act
+        fillInput(_driver, "objectives", _qualityObjectives);
+        var expected = _qualityObjectives;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "objectives");
+
+        // Assert       
+        assertNotEquals(expected, actual);
+    }
+
+    @Test
+    public void When_entering_10_million_chars_in_the_quality_roles_field_and_save_the_action_must_fail(){
+        // Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-131-a-137", _propsList);
+        _qualityRoles = config.getProperty("qualityStandards");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+
+        // Act
+        fillInput(_driver, "roles_responsibilities", _qualityRoles);
+        var expected = _qualityRoles;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "roles_responsibilities");
+
+        // Assert       
+        assertNotEquals(expected, actual);
+    }
+
+    
+    public void When_entering_10_million_chars_in_the_project_deliverables_field_and_save_the_action_must_fail(){
+        // Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-131-a-137", _propsList);
+        _projectDeliverables = config.getProperty("qualityStandards");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+
+        // Act
+        fillInput(_driver, "deliverables", _projectDeliverables);
+        var expected = _projectDeliverables;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "deliverables");
+
+        // Assert       
+        assertNotEquals(expected, actual);
+    }
+
+    public void When_entering_10_million_chars_in_the_quality_control_field_and_save_the_action_must_fail(){
+        // Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-131-a-137", _propsList);
+        _qualityControl = config.getProperty("qualityStandards");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+
+        // Act
+        fillInput(_driver, "activities", _qualityControl);
+        var expected = _qualityControl;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "activities");
+
+        // Assert       
+        assertNotEquals(expected, actual);
+    }
+
     private boolean isAlertPresent(WebDriver driver) {
         try {
             driver.switchTo().alert();
@@ -307,7 +402,8 @@ public class MaintainQualityManagementPlanTest {
         catch (Exception e) {
             return false;
         } 
-    }      
+    }
+
     private void uploadFile(WebDriver driver, String imgDescription, String filePath) {
         File file = new File(filePath);         
         WebElement inputDescription = (new WebDriverWait(driver, _timeOutInSeconds))
@@ -322,12 +418,14 @@ public class MaintainQualityManagementPlanTest {
         .until(ExpectedConditions.presenceOfElementLocated(By.id("img-submit")));
         btnSubmit.click();        
     }    
+
     private String getTooltipValue(WebDriver driver, String pathTooltip){
         WebElement tooltipTarget = (new WebDriverWait(_driver, _timeOutInSeconds))
         .until(ExpectedConditions.presenceOfElementLocated(By.xpath(pathTooltip)));        
         var actual = tooltipTarget.getAttribute("data-original-title");
         return actual;
     }
+
     private void fillInput(WebDriver driver, String idInput, String data){
         WebElement inputQualityStandards = (new WebDriverWait(driver, _timeOutInSeconds))
         .until(ExpectedConditions.presenceOfElementLocated(By.id(idInput)));
@@ -338,16 +436,19 @@ public class MaintainQualityManagementPlanTest {
         .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/form/div[8]/button")));
         btnSave.click();            
     }
+
     private String getActualFieldValue(WebDriver driver, String id){
         WebElement inputTarget = (new WebDriverWait(_driver, _timeOutInSeconds))
         .until(ExpectedConditions.presenceOfElementLocated(By.id(id)));        
         var actual = inputTarget.getText();
         return actual;
     }
+
     private void navigateToMaintainQualityManagementPlan(WebDriver driver) {
         driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/project/75");
         driver.navigate().to("http://lesse.com.br/tools/pmst_rp2/quality/quality-mp/edit/75");
     }  
+
     private void signin(WebDriver driver, String email, String password) {
       WebElement inputEmailElementById = (new WebDriverWait(driver, _timeOutInSeconds))
           .until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
@@ -361,5 +462,4 @@ public class MaintainQualityManagementPlanTest {
           .until(ExpectedConditions.presenceOfElementLocated(By.id("login-submit")));
       submitLoginElementById.click();
     }
-    
 }
