@@ -58,235 +58,234 @@ public class MaintainQualityManagementPlanTest {
         _driver.quit();
     }    
     
-//    @Test
-//    public void when_entering_a_value_in_the_quality_standards_field_the_quality_standards_field_must_have_the_same_value_as_the_entry(){
-//        //Arrange
-//        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-103", _propsList);
-//        _qualityStandards = config.getProperty("qualityStandards");
-//        _driver.navigate().to(_uriLogin);
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act        
-//        fillInput(_driver, "standards", _qualityStandards);
-//        var expected = _qualityStandards;
-//        _driver.navigate().refresh();
-//        var actual = getActualFieldValue(_driver, "standards");       
-//        //Assert       
-//        assertEquals(expected, actual);
-//    }
-//    
-//    @Test
-//    public void when_entering_a_value_in_the_quality_objectives_field_the_quality_objectives_field_must_have_the_same_value_as_the_entry(){
-//        //Arrange
-//        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-104", _propsList);
-//        _qualityObjectives = config.getProperty("qualityObjectives");
-//        _driver.navigate().to(_uriLogin);
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act        
-//        fillInput(_driver, "objectives", _qualityObjectives);
-//        var expected = _qualityObjectives;
-//        _driver.navigate().refresh();
-//        var actual = getActualFieldValue(_driver, "objectives");       
-//        //Assert       
-//        assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void when_entering_a_value_in_the_quality_roles_field_the_quality_roles_field_must_have_the_same_value_as_the_entry(){
-//        //Arrange
-//        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-105", _propsList);
-//        _qualityRoles = config.getProperty("qualityRoles");
-//        _driver.navigate().to(_uriLogin);
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act        
-//        fillInput(_driver, "roles_responsibilities", _qualityRoles);
-//        var expected = _qualityRoles;
-//        _driver.navigate().refresh();
-//        var actual = getActualFieldValue(_driver, "roles_responsibilities");       
-//        //Assert       
-//        assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void when_entering_a_value_in_the_project_deliverables_field_the_project_deliverables_field_must_have_the_same_value_as_the_entry(){
-//        //Arrange
-//        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-106", _propsList);
-//        _projectDeliverables = config.getProperty("projectDeliverables");
-//        _driver.navigate().to(_uriLogin);
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act        
-//        fillInput(_driver, "deliverables", _projectDeliverables);
-//        var expected = _projectDeliverables;
-//        _driver.navigate().refresh();
-//        var actual = getActualFieldValue(_driver, "deliverables");       
-//        //Assert       
-//        assertEquals(expected, actual);
-//    }
-//    
-//    @Test
-//    public void when_entering_a_value_in_the_quality_control_field_the_quality_control_field_must_have_the_same_value_as_the_entry(){
-//        //Arrange
-//        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-107", _propsList);
-//        _qualityControl = config.getProperty("qualityControl");
-//        _driver.navigate().to(_uriLogin);
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act        
-//        fillInput(_driver, "activities", _qualityControl);
-//        var expected = _qualityControl;
-//        _driver.navigate().refresh();
-//        var actual = getActualFieldValue(_driver, "activities");       
-//        //Assert       
-//        assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void when_entering_a_value_in_the_quality_tools_field_the_quality_tools_field_must_have_the_same_value_as_the_entry(){
-//        //Arrange
-//        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-108", _propsList);
-//        _qualityTools = config.getProperty("qualityTools");
-//        _driver.navigate().to(_uriLogin);
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act        
-//        fillInput(_driver, "tools", _qualityTools);
-//        var expected = _qualityTools;
-//        _driver.navigate().refresh();
-//        var actual = getActualFieldValue(_driver, "tools");       
-//        //Assert       
-//        assertEquals(expected, actual);
-//    }
-//    
-//    @Test
-//    public void when_entering_a_value_in_the_major_procedures_field_the_major_procedures_field_must_have_the_same_value_as_the_entry(){
-//        //Arrange
-//        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-109", _propsList);
-//        _majorProcedures = config.getProperty("majorProcedures");
-//        _driver.navigate().to(_uriLogin);
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act        
-//        fillInput(_driver, "procedures", _majorProcedures);
-//        var expected = _majorProcedures;
-//        _driver.navigate().refresh();
-//        var actual = getActualFieldValue(_driver, "procedures");       
-//        //Assert       
-//        assertEquals(expected, actual);
-//    }  
-//    
-//    @Test
-//    public void When_hovering_the_mouse_over_the_quality_standards_tooltip__must_should_show_a_tip_for_filling(){
-//        //Arrange
-//        _driver.navigate().to(_uriLogin);    
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act
-//        var notExpected = "";
-//        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[1]/a");
-//        //Assert
-//        assertNotEquals(notExpected, messageTooltip);
-//    }
-//    
-//    @Test
-//    public void When_hovering_the_mouse_over_the_quality_objectives_tooltip_must_should_show_a_tip_for_filling(){
-//        //Arrange
-//        _driver.navigate().to(_uriLogin);    
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act
-//        var notExpected = "";
-//        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[2]/a");
-//        //Assert
-//        assertNotEquals(notExpected, messageTooltip);
-//    }
-//    
-//    @Test
-//    public void When_hovering_the_mouse_over_the_quality_roles_tooltip_must_should_show_a_tip_for_filling(){
-//        //Arrange
-//        _driver.navigate().to(_uriLogin);    
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act
-//        var notExpected = "";
-//        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[3]/a");
-//        //Assert
-//        assertNotEquals(notExpected, messageTooltip);
-//    }
-//
-//    @Test
-//    public void When_hovering_the_mouse_over_the_project_deliverables_tooltip_must_should_show_a_tip_for_filling(){
-//        //Arrange
-//        _driver.navigate().to(_uriLogin);    
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act
-//        var notExpected = "";
-//        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[4]/a");
-//        //Assert
-//        assertNotEquals(notExpected, messageTooltip);
-//    }
-//    
-//    @Test
-//    public void When_hovering_the_mouse_over_the_quality_control_tooltip_must_should_show_a_tip_for_filling(){
-//        //Arrange
-//        _driver.navigate().to(_uriLogin);    
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act
-//        var notExpected = "";
-//        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[5]/a");
-//        //Assert
-//        assertNotEquals(notExpected, messageTooltip);
-//    }
-//    
-//    @Test
-//    public void When_hovering_the_mouse_over_the_quality_tools_tooltip_must_should_show_a_tip_for_filling(){
-//        //Arrange
-//        _driver.navigate().to(_uriLogin);    
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act
-//        var notExpected = "";
-//        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[6]/a");
-//        //Assert
-//        assertNotEquals(notExpected, messageTooltip);
-//    }
-//
-//    @Test
-//    public void When_hovering_the_mouse_over_the_major_procedures_tooltip_must_should_show_a_tip_for_filling(){
-//        //Arrange
-//        _driver.navigate().to(_uriLogin);    
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver);
-//        //Act
-//        var notExpected = "";
-//        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[7]/a");
-//        //Assert
-//        assertNotEquals(notExpected, messageTooltip);
-//    }
-//
-//    @Test
-//    public void test1(){
-//        //Arrange
-//        _driver.navigate().to(_uriLogin);    
-//        signin(_driver, _email, _password);
-//        navigateToMaintainQualityManagementPlan(_driver); 
-//        var expected = "No images found.";
-//        //Act       
-//        uploadFile(_driver, ".", "config/MaintainQualityManagementPlan/inValidFile.txt");
-//        
-//        WebElement validationFile = (new WebDriverWait(_driver, _timeOutInSeconds))
-//        .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/form/div[8]/div[2]/div/div")));         
-//        var actual = validationFile.getText();
-//        //Assert
-//        assertEquals(expected, actual);
-//        
-//    }
     @Test
-    public void test2(){
+    public void when_entering_a_value_in_the_quality_standards_field_the_quality_standards_field_must_have_the_same_value_as_the_entry(){
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-103", _propsList);
+        _qualityStandards = config.getProperty("qualityStandards");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act        
+        fillInput(_driver, "standards", _qualityStandards);
+        var expected = _qualityStandards;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "standards");       
+        //Assert       
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void when_entering_a_value_in_the_quality_objectives_field_the_quality_objectives_field_must_have_the_same_value_as_the_entry(){
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-104", _propsList);
+        _qualityObjectives = config.getProperty("qualityObjectives");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act        
+        fillInput(_driver, "objectives", _qualityObjectives);
+        var expected = _qualityObjectives;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "objectives");       
+        //Assert       
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void when_entering_a_value_in_the_quality_roles_field_the_quality_roles_field_must_have_the_same_value_as_the_entry(){
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-105", _propsList);
+        _qualityRoles = config.getProperty("qualityRoles");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act        
+        fillInput(_driver, "roles_responsibilities", _qualityRoles);
+        var expected = _qualityRoles;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "roles_responsibilities");       
+        //Assert       
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void when_entering_a_value_in_the_project_deliverables_field_the_project_deliverables_field_must_have_the_same_value_as_the_entry(){
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-106", _propsList);
+        _projectDeliverables = config.getProperty("projectDeliverables");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act        
+        fillInput(_driver, "deliverables", _projectDeliverables);
+        var expected = _projectDeliverables;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "deliverables");       
+        //Assert       
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void when_entering_a_value_in_the_quality_control_field_the_quality_control_field_must_have_the_same_value_as_the_entry(){
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-107", _propsList);
+        _qualityControl = config.getProperty("qualityControl");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act        
+        fillInput(_driver, "activities", _qualityControl);
+        var expected = _qualityControl;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "activities");       
+        //Assert       
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void when_entering_a_value_in_the_quality_tools_field_the_quality_tools_field_must_have_the_same_value_as_the_entry(){
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-108", _propsList);
+        _qualityTools = config.getProperty("qualityTools");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act        
+        fillInput(_driver, "tools", _qualityTools);
+        var expected = _qualityTools;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "tools");       
+        //Assert       
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void when_entering_a_value_in_the_major_procedures_field_the_major_procedures_field_must_have_the_same_value_as_the_entry(){
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-109", _propsList);
+        _majorProcedures = config.getProperty("majorProcedures");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act        
+        fillInput(_driver, "procedures", _majorProcedures);
+        var expected = _majorProcedures;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "procedures");       
+        //Assert       
+        assertEquals(expected, actual);
+    }  
+    
+    @Test
+    public void When_hovering_the_mouse_over_the_quality_standards_tooltip__must_should_show_a_tip_for_filling(){
+        //Arrange
+        _driver.navigate().to(_uriLogin);    
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act
+        var notExpected = "";
+        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[1]/a");
+        //Assert
+        assertNotEquals(notExpected, messageTooltip);
+    }
+    
+    @Test
+    public void When_hovering_the_mouse_over_the_quality_objectives_tooltip_must_should_show_a_tip_for_filling(){
+        //Arrange
+        _driver.navigate().to(_uriLogin);    
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act
+        var notExpected = "";
+        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[2]/a");
+        //Assert
+        assertNotEquals(notExpected, messageTooltip);
+    }
+    
+    @Test
+    public void When_hovering_the_mouse_over_the_quality_roles_tooltip_must_should_show_a_tip_for_filling(){
+        //Arrange
+        _driver.navigate().to(_uriLogin);    
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act
+        var notExpected = "";
+        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[3]/a");
+        //Assert
+        assertNotEquals(notExpected, messageTooltip);
+    }
+
+    @Test
+    public void When_hovering_the_mouse_over_the_project_deliverables_tooltip_must_should_show_a_tip_for_filling(){
+        //Arrange
+        _driver.navigate().to(_uriLogin);    
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act
+        var notExpected = "";
+        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[4]/a");
+        //Assert
+        assertNotEquals(notExpected, messageTooltip);
+    }
+    
+    @Test
+    public void When_hovering_the_mouse_over_the_quality_control_tooltip_must_should_show_a_tip_for_filling(){
+        //Arrange
+        _driver.navigate().to(_uriLogin);    
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act
+        var notExpected = "";
+        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[5]/a");
+        //Assert
+        assertNotEquals(notExpected, messageTooltip);
+    }
+    
+    @Test
+    public void When_hovering_the_mouse_over_the_quality_tools_tooltip_must_should_show_a_tip_for_filling(){
+        //Arrange
+        _driver.navigate().to(_uriLogin);    
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act
+        var notExpected = "";
+        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[6]/a");
+        //Assert
+        assertNotEquals(notExpected, messageTooltip);
+    }
+
+    @Test
+    public void When_hovering_the_mouse_over_the_major_procedures_tooltip_must_should_show_a_tip_for_filling(){
+        //Arrange
+        _driver.navigate().to(_uriLogin);    
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+        //Act
+        var notExpected = "";
+        var messageTooltip = getTooltipValue(_driver, "/html/body/div[1]/div/section/div/div/div/form/div[7]/a");
+        //Assert
+        assertNotEquals(notExpected, messageTooltip);
+    }
+
+    @Test
+    public void When_an_invalid_file_must_should_show_a_failure_message(){
+        //Arrange
+        _driver.navigate().to(_uriLogin);    
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver); 
+        var expected = "No images found.";
+        //Act       
+        uploadFile(_driver, ".", "config/MaintainQualityManagementPlan/inValidFile.txt");
+        
+        WebElement validationFile = (new WebDriverWait(_driver, _timeOutInSeconds))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/form/div[8]/div[2]/div/div")));         
+        var actual = validationFile.getText();
+        //Assert
+        assertEquals(expected, actual);      
+    }
+    @Test
+    public void When_inserting_javascript_must_not_execute_the_javascript(){
         //Arrange
         var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-118", _propsList);
         _javascriptInjection = config.getProperty("javascriptInjection");        
@@ -296,10 +295,8 @@ public class MaintainQualityManagementPlanTest {
         //Act      
         uploadFile(_driver, _javascriptInjection, "config/MaintainQualityManagementPlan/validFile.PNG");
         var isAlert = isAlertPresent(_driver);
-
         //Assert
-        assertTrue(isAlert);
-        
+        assertFalse(isAlert);       
     }
 
     private boolean isAlertPresent(WebDriver driver) {
