@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -272,6 +273,324 @@ public class BusinessCaseTest {
         assertNotEquals(expectedMessage, actualMessage);
     }
 
+    @Test
+    public void When_to_create_a_business_case_with_business_deals_field_with_10000_characteres_then_this_field_must_not_keep_this_many() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest12", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+        
+        String actualText = getFieldText(_driver, "business_deals");
+
+        //Assert
+        assertTrue(actualText.compareTo(_businessDeals) < 0);
+    }
+
+    @Test
+    public void When_to_create_a_business_case_with_situation_analysis_field_with_10000_characteres_then_this_field_must_not_keep_this_many() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest13", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+        
+        String actualText = getFieldText(_driver, "situation_analysis");
+
+        //Assert
+        assertTrue(actualText.compareTo(_businessDeals) < 0);
+    }
+
+    @Test
+    public void When_to_create_a_business_case_with_recommendation_field_with_10000_characteres_then_this_field_must_not_keep_this_many() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest14", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+        
+        String actualText = getFieldText(_driver, "recommendation");
+
+        //Assert
+        assertTrue(actualText.compareTo(_businessDeals) < 0);
+    }
+
+    @Test
+    public void When_to_create_a_business_case_with_evaliation_field_with_10000_characteres_then_this_field_must_not_keep_this_many() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest15", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+        
+        String actualText = getFieldText(_driver, "evaluation");
+
+        //Assert
+        assertTrue(actualText.compareTo(_businessDeals) < 0);
+    }
+
+    @Test
+    public void When_to_create_a_business_case_and_do_not_save_it_then_the_business_deals_field_must_keep_the_old_text() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest16", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+
+        createBusinessCaseWithoutSaving(_driver, "", "", "", "");
+        
+        String actualText = getFieldText(_driver, "business_deals");
+
+        //Assert
+        assertTrue(actualText.equals(_businessDeals));
+    }
+
+    @Test
+    public void When_to_create_a_business_case_and_do_not_save_it_then_the_situation_analysis_field_must_keep_the_old_text() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest16", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+
+        createBusinessCaseWithoutSaving(_driver, "", "", "", "");
+        
+        String actualText = getFieldText(_driver, "situation_analysis");
+
+        //Assert
+        assertTrue(actualText.equals(_situationAnalysis));
+    }
+
+    @Test
+    public void When_to_create_a_business_case_and_do_not_save_it_then_the_recommendation_field_must_keep_the_old_text() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest16", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+
+        createBusinessCaseWithoutSaving(_driver, "", "", "", "");
+        
+        String actualText = getFieldText(_driver, "recommendation");
+
+        //Assert
+        assertTrue(actualText.equals(_recommendation));
+    }
+
+    @Test
+    public void When_to_create_a_business_case_and_do_not_save_it_then_the_evaluation_field_must_keep_the_old_text() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest16", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+
+        createBusinessCaseWithoutSaving(_driver, "", "", "", "");
+        
+        String actualText = getFieldText(_driver, "evaluation");
+
+        //Assert
+        assertTrue(actualText.equals(_evaluation));
+    }
+
+    @Test
+    public void When_to_create_a_business_case_then_the_business_deals_field_must_be_saved() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest16", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+        
+        String actualText = getFieldText(_driver, "business_deals");
+
+        //Assert
+        assertEquals(actualText, _businessDeals);
+    }
+
+    @Test
+    public void When_to_create_a_business_case_then_the_situatuion_analysis_field_must_be_saved() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest16", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+        
+        String actualText = getFieldText(_driver, "situation_analysis");
+
+        //Assert
+        assertEquals(actualText, _situationAnalysis);
+    }
+
+    @Test
+    public void When_to_create_a_business_case_then_the_recommendation_field_must_be_saved() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest16", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+        
+        String actualText = getFieldText(_driver, "recommendation");
+
+        //Assert
+        assertEquals(actualText, _recommendation);
+    }
+
+    @Test
+    public void When_to_create_a_business_case_then_the_evaluation_field_must_be_saved() {
+        //Arrange
+        var config = Configuration.getConfiguration("BusinessCaseTest/inputsTest16", _propsList);
+        _businessDeals = config.getProperty("businessDeals");
+        _situationAnalysis = config.getProperty("situationAnalysis");
+        _recommendation = config.getProperty("recommendation");
+        _evaluation = config.getProperty("evaluation");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        navigateToBusinessCase(_driver);
+
+        //Act
+        createBusinessCase(_driver, _businessDeals, _situationAnalysis, _recommendation, _evaluation);
+        
+        String actualText = getFieldText(_driver, "evaluation");
+
+        //Assert
+        assertEquals(actualText, _evaluation);
+    }
+
+    private void createBusinessCaseWithoutSaving(WebDriver driver,String businessDeals, String situationAnalysis, String recommendation, String evaluation) {
+        WebElement businessDealElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("business_deals")));
+        
+        businessDealElementById.clear();
+        businessDealElementById.sendKeys(businessDeals);
+
+        WebElement situationAnalysisElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.id("situation_analysis")));
+        
+        situationAnalysisElementById.clear();
+        situationAnalysisElementById.sendKeys(situationAnalysis);
+
+        WebElement recommendationElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("recommendation")));
+
+        recommendationElementById.clear();
+        recommendationElementById.sendKeys(recommendation);
+
+        WebElement evaluationElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("evaluation")));
+
+        evaluationElementById.clear();
+        evaluationElementById.sendKeys(evaluation);
+
+        goBack(_driver);
+    }
+
+    private void goBack(WebDriver driver) {
+        WebElement messageElementByClass = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/form/div[5]/form/button")));
+            messageElementByClass.click();
+    }
+
     private void saveBusinessCase(WebDriver driver) {
         List<WebElement> buttonsElementByClass = (new WebDriverWait(driver, _timeOutInSeconds))
             .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("btn-success")));
@@ -309,6 +628,14 @@ public class BusinessCaseTest {
         } catch(Exception e) {
             return false;
         }
+    }
+
+    private String getFieldText(WebDriver driver, String field) {
+        navigateToBusinessCase(_driver);
+
+        WebElement businessDealElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id(field)));
+        return businessDealElementById.getText();
     }
 
     private void createBusinessCase(WebDriver driver,String businessDeals, String situationAnalysis, String recommendation, String evaluation) {  
