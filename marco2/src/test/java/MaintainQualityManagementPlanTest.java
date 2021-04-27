@@ -357,7 +357,7 @@ public class MaintainQualityManagementPlanTest {
         assertNotEquals(expected, actual);
     }
 
-    
+    @Test
     public void When_entering_10_million_chars_in_the_project_deliverables_field_and_save_the_action_must_fail(){
         // Arrange
         var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-131-a-137", _propsList);
@@ -376,6 +376,7 @@ public class MaintainQualityManagementPlanTest {
         assertNotEquals(expected, actual);
     }
 
+    @Test
     public void When_entering_10_million_chars_in_the_quality_control_field_and_save_the_action_must_fail(){
         // Arrange
         var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-131-a-137", _propsList);
@@ -389,6 +390,44 @@ public class MaintainQualityManagementPlanTest {
         var expected = _qualityControl;
         _driver.navigate().refresh();
         var actual = getActualFieldValue(_driver, "activities");
+
+        // Assert       
+        assertNotEquals(expected, actual);
+    }
+
+    @Test
+    public void When_entering_10_million_chars_in_the_quality_tools_field_and_save_the_action_must_fail(){
+        // Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-131-a-137", _propsList);
+        _qualityTools = config.getProperty("qualityStandards");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+
+        // Act
+        fillInput(_driver, "tools", _qualityTools);
+        var expected = _qualityTools;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "tools");
+
+        // Assert       
+        assertNotEquals(expected, actual);
+    }
+
+    @Test
+    public void When_entering_10_million_chars_in_the_major_procedures_field_and_save_the_action_must_fail(){
+        // Arrange
+        var config = Configuration.getConfiguration("MaintainQualityManagementPlan/RP2G6-131-a-137", _propsList);
+        _majorProcedures = config.getProperty("qualityStandards");
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        navigateToMaintainQualityManagementPlan(_driver);
+
+        // Act
+        fillInput(_driver, "procedures", _majorProcedures);
+        var expected = _majorProcedures;
+        _driver.navigate().refresh();
+        var actual = getActualFieldValue(_driver, "procedures");
 
         // Assert       
         assertNotEquals(expected, actual);
