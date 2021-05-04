@@ -224,6 +224,146 @@ public class MaintainAssumptionLogTest {
         assertTrue(existsTooltip(_driver, expectedExample));
     }
 
+    @Test
+    public void When_to_create_a_assumption_with_spaces_in_description_then_it_must_not_change_URL() {
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainAssumptionLog/inputsTest5", _propsList);
+        String desc = config.getProperty("descriptionLog");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        String currentURL;
+
+        //Act
+        navigateToAssumptionLog(_driver);
+        createAssumptionLogWithoutToSave(_driver, desc, "assumption");
+        currentURL = _driver.getCurrentUrl();
+        saveAssumptionLog(_driver);
+
+        //Assert
+        assertNotEquals(currentURL, _driver.getCurrentUrl());
+    }
+
+    @Test
+    public void When_to_create_a_constraints_with_spaces_in_description_then_it_must_not_change_URL() {
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainAssumptionLog/inputsTest5", _propsList);
+        String desc = config.getProperty("descriptionLog");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        String currentURL;
+
+        //Act
+        navigateToAssumptionLog(_driver);
+        createAssumptionLogWithoutToSave(_driver, desc, "");
+        currentURL = _driver.getCurrentUrl();
+        saveAssumptionLog(_driver);
+
+        //Assert
+        assertNotEquals(currentURL, _driver.getCurrentUrl());
+    }
+
+    @Test
+    public void When_to_create_a_assumption_with_correct_input_in_description_then_it_must_change_URL() {
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainAssumptionLog/inputsTest6", _propsList);
+        String desc = config.getProperty("descriptionLog");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        String expectedURL;
+
+        //Act
+        navigateToAssumptionLog(_driver);
+        expectedURL = _driver.getCurrentUrl();
+        createAssumptionLogWithoutToSave(_driver, desc, "assumption");
+        saveAssumptionLog(_driver);
+
+        //Assert
+        assertEquals(expectedURL, _driver.getCurrentUrl());
+    }
+
+    @Test
+    public void When_to_create_a_constraint_with_correct_input_in_description_then_it_must_change_URL() {
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainAssumptionLog/inputsTest6", _propsList);
+        String desc = config.getProperty("descriptionLog");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+        String expectedURL;
+
+        //Act
+        navigateToAssumptionLog(_driver);
+        expectedURL = _driver.getCurrentUrl();
+        createAssumptionLogWithoutToSave(_driver, desc, "");
+        saveAssumptionLog(_driver);
+
+        //Assert
+        assertEquals(expectedURL, _driver.getCurrentUrl());
+    }
+
+    @Test
+    public void When_to_search_for_item_with_description_just_with_spaces_than_it_must_give_the_correct_finding() {
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainAssumptionLog/inputsTest5", _propsList);
+        String desc = config.getProperty("descriptionLog");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        //Act
+        navigateToAssumptionLog(_driver);
+        createAssumptionLogWithoutToSave(_driver, desc, "");
+        saveAssumptionLog(_driver);
+
+        config = Configuration.getConfiguration("MaintainAssumptionLog/inputsTest6", _propsList);
+        desc = config.getProperty("descriptionLog");
+
+        createAssumptionLogWithoutToSave(_driver, desc, "");
+        saveAssumptionLog(_driver);
+        searchForSomething(_driver, desc);
+
+        //Assert
+        assertEquals(desc, getFindings(_driver));
+    }
+
+    @Test
+    public void When_to_search_for_item_than_it_must_give_the_correct_finding() {
+        //Arrange
+        var config = Configuration.getConfiguration("MaintainAssumptionLog/inputsTest6", _propsList);
+        String desc = config.getProperty("descriptionLog");
+
+        _driver.navigate().to(_uriLogin);
+        signin(_driver, _email, _password);
+
+        //Act
+        navigateToAssumptionLog(_driver);
+        createAssumptionLogWithoutToSave(_driver, desc, "");
+        saveAssumptionLog(_driver);
+
+        searchForSomething(_driver, desc);
+
+        //Assert
+        assertEquals(desc, getFindings(_driver));
+    }
+
+    private void searchForSomething(WebDriver driver, String entry) {
+        WebElement inputEmailElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/section/div/div/div/div[2]/div/div/div[1]/div[2]/div/label/input")));
+        inputEmailElementById.sendKeys(entry);
+    }
+
+    private String getFindings(WebDriver driver) {
+        WebElement inputEmailElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.className("odd")));
+            inputEmailElementById = (new WebDriverWait(driver, _timeOutInSeconds))
+            .until(ExpectedConditions.presenceOfElementLocated(By.className("texttd")));
+        String desc = inputEmailElementById.getText();
+        return desc;
+    }
+
     private void createAssumptionLogWithoutToSave(WebDriver driver,String descriptionLog, String option) { 
         
         List<WebElement> buttonsByClassName = (new WebDriverWait(driver, _timeOutInSeconds))
