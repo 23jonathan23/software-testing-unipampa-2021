@@ -133,7 +133,7 @@ public class RegisterUserTest {
     @Test
     public void When_register_a_new_user_with_many_characters_in_the_name_field_then_the_user_must_stay_on_the_current_page() {
         //Arrange
-        var config = Configuration.getConfiguration("RegisterUser/RP2G6-8", _propsList);
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-155", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");
@@ -153,9 +153,9 @@ public class RegisterUserTest {
     }
 
     @Test
-    public void When_register_a_new_user_with_many_characters_in_the_password_field_then_the_user_must_stay_on_the_current_page() {
+    public void When_register_a_new_user_with_many_characters_in_the_password_field_then_the_user_must_stay_on_the_current_page() {  
         //Arrange
-        var config = Configuration.getConfiguration("RegisterUser/RP2G6-9", _propsList);
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-157", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");
@@ -177,7 +177,29 @@ public class RegisterUserTest {
     @Test
     public void When_register_a_new_user_with_an_invalid_email_then_the_user_must_stay_on_the_current_page() {
         //Arrange
-        var config = Configuration.getConfiguration("RegisterUser/RP2G6-10", _propsList);
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-158", _propsList);
+
+        _name = config.getProperty("name");
+        _email = config.getProperty("email");
+        _institution = config.getProperty("institution");
+        _password = config.getProperty("password");
+        
+        _driver.navigate().to(_uriRegister);
+       
+        //Act
+        register(_driver, _name, _email, _institution, _password);
+
+        var expectedUrl = _uriRegister;
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }
+    
+    @Test
+    public void When_you_navigate_to_the_silver_bullet_website_and_register_a_new_user_with_an_large_number_of_characters_name_field_then_must_be_to_stay_on_the_current_page() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-152", _propsList);
 
         _name = config.getProperty("name");
         _email = config.getProperty("email");
@@ -196,6 +218,70 @@ public class RegisterUserTest {
         assertEquals(expectedUrl, actualUrl);
     }
 
+    @Test
+    public void When_register_a_new_user_with_email_alread_registered_email_field_then_the_user_must_stay_on_the_current_page() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-153", _propsList);
+
+        _name = config.getProperty("name");
+        _email = config.getProperty("email");
+        _institution = config.getProperty("institution");
+        _password = config.getProperty("password");
+        
+        _driver.navigate().to(_uriRegister);
+       
+        //Act
+        register(_driver, _name, _email, _institution, _password);
+
+        var expectedUrl = _uriRegister;
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }
+
+    @Test
+    public void When_register_a_new_user_with_email_without_domain_email_field_then_the_user_must_stay_on_the_current_page() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-154", _propsList);
+
+        _name = config.getProperty("name");
+        _email = config.getProperty("email");
+        _institution = config.getProperty("institution");
+        _password = config.getProperty("password");
+        
+        _driver.navigate().to(_uriRegister);
+       
+        //Act
+        register(_driver, _name, _email, _institution, _password);
+
+        var expectedUrl = _uriRegister;
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }    
+@Test
+    public void When_register_a_new_user_with_many_characters_email_field_then_the_user_must_stay_on_the_current_page() {
+        //Arrange
+        var config = Configuration.getConfiguration("RegisterUser/RP2G6-156", _propsList);
+
+        _name = config.getProperty("name");
+        _email = config.getProperty("email");
+        _institution = config.getProperty("institution");
+        _password = config.getProperty("password");
+        
+        _driver.navigate().to(_uriRegister);
+       
+        //Act
+        register(_driver, _name, _email, _institution, _password);
+
+        var expectedUrl = _uriRegister;
+        var actualUrl = getCurrentUrl(_driver);
+
+        //Assert
+        assertEquals(expectedUrl, actualUrl);
+    }    
     private void register(WebDriver driver, String name, String email, String institution, String password) {
         WebElement inputNameElementById = (new WebDriverWait(driver, _timeOutInSeconds))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("name")));
